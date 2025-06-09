@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUD Calculator - Cannabis Business Tools</title>
+    <meta name="description" content="Professional-grade calculators for cannabis businesses. Optimize operations with our free tools for cultivation, extraction, edibles, and business planning.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-50">
+    <!-- Header -->
+    <nav class="sticky top-0 z-50 bg-gradient-to-r from-emerald-600/90 to-emerald-700/90 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <a href="/" class="flex-shrink-0 flex items-center">
+                        <span class="text-white text-xl font-bold">BUD Calculator</span>
+                    </a>
+                </div>
+
+                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                    <a href="/" class="text-white hover:text-emerald-100 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                    <a href="/calculators" class="text-white hover:text-emerald-100 px-3 py-2 rounded-md text-sm font-medium">Calculators</a>
+                    <a href="/resources" class="text-white hover:text-emerald-100 px-3 py-2 rounded-md text-sm font-medium">Resources</a>
+                    <a href="/contact" class="text-white hover:text-emerald-100 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                </div>
+
+                <div class="flex items-center sm:hidden">
+                    <button id="menuButton" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-emerald-700">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="sm:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="/" class="text-white hover:bg-emerald-700 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="/calculators" class="text-white hover:bg-emerald-700 block px-3 py-2 rounded-md text-base font-medium">Calculators</a>
+                <a href="/resources" class="text-white hover:bg-emerald-700 block px-3 py-2 rounded-md text-base font-medium">Resources</a>
+                <a href="/contact" class="text-white hover:bg-emerald-700 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl mb-8">
+                Powerful Free Tools for Every Cannabis Business
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                Professional-grade calculators to optimize your operations
+            </p>
+            <a href="/calculators" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl text-lg font-medium transition-colors">
+                View Calculators
+            </a>
+        </div>
+
+        <!-- Feature Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            <div class="bg-white rounded-xl shadow hover:shadow-lg hover:-translate-y-1 transition p-6">
+                <div class="text-4xl mb-4">🌱</div>
+                <h3 class="text-xl font-semibold mb-2">Cultivators</h3>
+                <p class="text-gray-600">Break-even & cost per unit</p>
+            </div>
+            <div class="bg-white rounded-xl shadow hover:shadow-lg hover:-translate-y-1 transition p-6">
+                <div class="text-4xl mb-4">🧪</div>
+                <h3 class="text-xl font-semibold mb-2">Extraction</h3>
+                <p class="text-gray-600">Yield & cost calculators</p>
+            </div>
+            <div class="bg-white rounded-xl shadow hover:shadow-lg hover:-translate-y-1 transition p-6">
+                <div class="text-4xl mb-4">🧴</div>
+                <h3 class="text-xl font-semibold mb-2">Edibles</h3>
+                <p class="text-gray-600">THC/CBD dosage tools</p>
+            </div>
+            <div class="bg-white rounded-xl shadow hover:shadow-lg hover:-translate-y-1 transition p-6">
+                <div class="text-4xl mb-4">📊</div>
+                <h3 class="text-xl font-semibold mb-2">Business</h3>
+                <p class="text-gray-600">ROI & pricing calculators</p>
+            </div>
+        </div>
+
+        <!-- Email Opt-in -->
+        <div class="max-w-lg mx-auto">
+            <form class="bg-white rounded-xl shadow p-6">
+                <h2 class="text-2xl font-semibold mb-2">📥 Get the Free SOP Efficiency Toolkit</h2>
+                <p class="text-gray-600 mb-4">Streamline your operations with our proven standard operating procedures</p>
+                <div class="flex gap-4">
+                    <input
+                        type="email"
+                        placeholder="Enter your email"
+                        class="flex-1 rounded-xl border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 px-4 py-2 border"
+                    />
+                    <button
+                        type="submit"
+                        class="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl px-5 py-3 font-medium transition-colors"
+                    >
+                        Get Access
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-800 text-white mt-auto">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <nav class="flex flex-wrap justify-center -mx-5 -my-2">
+                <div class="px-5 py-2">
+                    <a href="/" class="text-base hover:text-emerald-100">Home</a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="/calculators" class="text-base hover:text-emerald-100">Calculators</a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="/resources" class="text-base hover:text-emerald-100">Resources</a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="/contact" class="text-base hover:text-emerald-100">Contact</a>
+                </div>
+            </nav>
+            <p class="mt-8 text-center text-base">
+                &copy; 2025 BUD Calculator. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const menuButton = document.getElementById('menuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuButton.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden', !isHidden);
+            
+            // Update menu icon
+            const svg = menuButton.querySelector('svg');
+            if (isHidden) {
+                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>';
+            } else {
+                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>';
+            }
+        });
+    </script>
+</body>
+</html>
