@@ -48,7 +48,7 @@ export default function CalculatorsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCalculators.map((calc) => (
             <Link key={calc.slug} href={`/calculators/${calc.slug}`}>
-              <div className="group bg-secondary rounded-xl p-6 hover:border-primary border transition-colors">
+              <div className="group bg-secondary rounded-xl p-6 hover:border-primary border transition-colors flex flex-col justify-between min-h-[220px]">
                 <h2 className="text-lg font-semibold mb-2">{calc.name}</h2>
                 <p className="text-sm text-muted-foreground">{calc.description}</p>
                 <span className="mt-4 inline-block text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
