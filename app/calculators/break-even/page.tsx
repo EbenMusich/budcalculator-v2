@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import { Calculator, DollarSign, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   totalCost: string;
@@ -89,6 +90,9 @@ export default function BreakEvenCalculator() {
     });
 
     setResults(results);
+    
+    // Log usage
+    logUsage("Break-even", inputs, results);
   };
 
   const inputClasses = "w-full rounded-md bg-background text-foreground px-3 py-2 text-sm ring-1 ring-border/30 focus:ring-2 focus:ring-primary placeholder:text-muted-foreground";
@@ -247,7 +251,7 @@ export default function BreakEvenCalculator() {
               Calculate
             </Button>
 
-            {results && (
+            {results ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -291,7 +295,7 @@ export default function BreakEvenCalculator() {
                   </div>
                 ))}
               </motion.div>
-            )}
+            ) : null}
           </form>
 
           <div className="mt-8">

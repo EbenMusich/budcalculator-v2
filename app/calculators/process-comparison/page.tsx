@@ -6,6 +6,7 @@ import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Scale as Scales, CheckCircle2, Clock, DollarSign, Users, Package } from "lucide-react";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   units: string;
@@ -99,7 +100,7 @@ export default function ProcessComparisonCalculator() {
     const costSaved = totalCostA - totalCostB;
     const costDiffPct = (costSaved / totalCostA) * 100;
 
-    setResults({
+    const calculationResults = {
       processA: {
         totalTime: totalTimeA,
         laborCost: laborCostA,
@@ -119,7 +120,44 @@ export default function ProcessComparisonCalculator() {
         timeDiffPct,
         costSaved,
         costDiffPct,
-        recommend: totalCostA > totalCostB ? "B" : "A",
+        recommend: (totalCostA > totalCostB ? "B" : "A") as "A" | "B",
+      },
+    };
+
+    setResults(calculationResults);
+
+    // Log usage with all inputs and results
+    logUsage("Process Comparison", {
+      units: values.units,
+      timeA: values.timeA,
+      timeB: values.timeB,
+      rateA: values.rateA,
+      rateB: values.rateB,
+      workersA: values.workersA,
+      workersB: values.workersB,
+      consumableA: values.consumableA,
+      consumableB: values.consumableB,
+    }, {
+      processA: {
+        totalTime: totalTimeA,
+        laborCost: laborCostA,
+        consumables: consumablesA,
+        totalCost: totalCostA,
+        costPerUnit: costPerUnitA,
+      },
+      processB: {
+        totalTime: totalTimeB,
+        laborCost: laborCostB,
+        consumables: consumablesB,
+        totalCost: totalCostB,
+        costPerUnit: costPerUnitB,
+      },
+      comparison: {
+        timeSaved,
+        timeDiffPct,
+        costSaved,
+        costDiffPct,
+        recommend: calculationResults.comparison.recommend,
       },
     });
   };
@@ -234,12 +272,12 @@ export default function ProcessComparisonCalculator() {
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-6">
                       <h2 className="text-xl font-semibold">Process A</h2>
-                      {results?.comparison.recommend === "A" && (
+                      {results?.comparison.recommend === "A" ? (
                         <div className="flex items-center gap-1 text-primary">
                           <CheckCircle2 className="w-5 h-5" />
                           <span className="font-medium">Recommended</span>
                         </div>
-                      )}
+                      ) : null}
                     </div>
                     <ProcessInputs process="A" />
                   </CardContent>
@@ -249,12 +287,12 @@ export default function ProcessComparisonCalculator() {
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-6">
                       <h2 className="text-xl font-semibold">Process B</h2>
-                      {results?.comparison.recommend === "B" && (
+                      {results?.comparison.recommend === "B" ? (
                         <div className="flex items-center gap-1 text-primary">
                           <CheckCircle2 className="w-5 h-5" />
                           <span className="font-medium">Recommended</span>
                         </div>
-                      )}
+                      ) : null}
                     </div>
                     <ProcessInputs process="B" />
                   </CardContent>
@@ -265,7 +303,7 @@ export default function ProcessComparisonCalculator() {
                 Compare Processes
               </Button>
 
-              {results && (
+              {results ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -350,7 +388,7 @@ export default function ProcessComparisonCalculator() {
                     </CardContent>
                   </Card>
                 </motion.div>
-              )}
+              ) : null}
             </form>
           </CardContent>
         </Card>

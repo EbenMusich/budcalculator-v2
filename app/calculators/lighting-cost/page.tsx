@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Lightbulb, Zap, Clock } from "lucide-react";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   fixtureType: string;
@@ -79,6 +80,15 @@ export default function LightingCostCalculator() {
     const totalCost = monthlyKwh * rate * months;
 
     setResults({
+      dailyCost,
+      monthlyCost,
+      annualCost,
+      totalCost,
+      totalKwh
+    });
+    
+    // Log usage
+    logUsage("Lighting Cost", inputs, {
       dailyCost,
       monthlyCost,
       annualCost,
@@ -242,7 +252,7 @@ export default function LightingCostCalculator() {
               Calculate
             </Button>
 
-            {results && (
+            {results ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -289,7 +299,7 @@ export default function LightingCostCalculator() {
                   </div>
                 </div>
               </motion.div>
-            )}
+            ) : null}
           </form>
 
           <div className="mt-8">

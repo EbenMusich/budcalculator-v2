@@ -6,6 +6,7 @@ import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Clock } from "lucide-react";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   sopName: string;
@@ -93,7 +94,28 @@ export default function SOPTimeTracker() {
     const laborCostPerUnit = values.unitsCompleted > 0 ? totalLaborCost / values.unitsCompleted : 0;
     const startOfWeek = getStartOfWeek(inputs.date);
 
-    setResults({
+    const calculationResults = {
+      totalTimeMinutes,
+      timePerUnit,
+      unitsPerHour,
+      totalLaborCost,
+      laborCostPerUnit,
+      startOfWeek,
+    };
+
+    setResults(calculationResults);
+
+    // Log usage with all inputs and results
+    logUsage("SOP Time Tracker", {
+      sopName: inputs.sopName,
+      employee: inputs.employee,
+      startTime: inputs.startTime,
+      endTime: inputs.endTime,
+      breakTime: values.breakTime,
+      unitsCompleted: values.unitsCompleted,
+      wage: values.wage,
+      date: inputs.date,
+    }, {
       totalTimeMinutes,
       timePerUnit,
       unitsPerHour,
@@ -270,7 +292,7 @@ export default function SOPTimeTracker() {
                 Calculate
               </Button>
 
-              {results && (
+              {results ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -322,31 +344,31 @@ export default function SOPTimeTracker() {
                         </div>
                       </div>
 
-                      {results.timePerUnit > 0 && (
+                      {results.timePerUnit > 0 ? (
                         <div className="mt-6 space-y-4">
-                          {results.timePerUnit > 5 && (
+                          {results.timePerUnit > 5 ? (
                             <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4">
                               <p className="text-yellow-600 dark:text-yellow-400 font-medium">Efficiency Alert</p>
                               <p className="text-sm text-muted-foreground mt-1">
                                 Time per unit is above 5 minutes. Consider reviewing the SOP for optimization opportunities.
                               </p>
                             </div>
-                          )}
+                          ) : null}
 
-                          {results.unitsPerHour >= 12 && (
+                          {results.unitsPerHour >= 12 ? (
                             <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
                               <p className="text-green-600 dark:text-green-400 font-medium">High Efficiency</p>
                               <p className="text-sm text-muted-foreground mt-1">
                                 Excellent productivity rate! This employee is performing above average.
                               </p>
                             </div>
-                          )}
+                          ) : null}
                         </div>
-                      )}
+                      ) : null}
                     </CardContent>
                   </Card>
                 </motion.div>
-              )}
+              ) : null}
             </form>
           </CardContent>
         </Card>

@@ -6,6 +6,7 @@ import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FlaskConical } from "lucide-react";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   inputWeight: string;
@@ -96,6 +97,20 @@ export default function ExtractionCostCalculator() {
     const yieldPercent = values.inputWeight > 0 ? (totalOutput / values.inputWeight) * 100 : 0;
 
     setResults({
+      materialCostPerGram,
+      materialCost,
+      solventCost,
+      laborCost,
+      totalCost,
+      totalOutput,
+      costPerGram,
+      costPerKg,
+      costPerLiter,
+      yieldPercent,
+    });
+    
+    // Log usage
+    logUsage("Extraction Cost", inputs, {
       materialCostPerGram,
       materialCost,
       solventCost,
@@ -281,7 +296,7 @@ export default function ExtractionCostCalculator() {
                 Calculate
               </Button>
 
-              {results && (
+              {results ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -322,7 +337,7 @@ export default function ExtractionCostCalculator() {
                     </p>
                   </div>
                 </motion.div>
-              )}
+              ) : null}
             </form>
           </CardContent>
         </Card>

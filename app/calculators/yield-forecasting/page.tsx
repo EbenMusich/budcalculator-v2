@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { logUsage } from "@/lib/logUsage";
 
 type Mode = 'light' | 'plant' | 'canopy';
 type Unit = 'g' | 'lb';
@@ -112,7 +113,32 @@ export default function YieldForecastCalculator() {
     const annualYield = baseYield * values.harvestsPerYear;
     const annualRevenue = values.salePrice ? annualYield * values.salePrice : null;
 
-    setResults({
+    const calculationResults = {
+      totalYield: baseYield,
+      usableFlower,
+      trim,
+      annualYield,
+      annualRevenue,
+    };
+
+    setResults(calculationResults);
+
+    // Log usage with all inputs and results
+    logUsage("Yield Forecast", {
+      mode: inputs.mode,
+      harvestsPerYear: values.harvestsPerYear,
+      lights: values.lights,
+      yieldPerLight: values.yieldPerLight,
+      unitLight: inputs.unitLight,
+      plants: values.plants,
+      yieldPerPlant: values.yieldPerPlant,
+      unitPlant: inputs.unitPlant,
+      canopyArea: values.canopyArea,
+      yieldPerArea: values.yieldPerArea,
+      unitArea: inputs.unitArea,
+      trimRatio: values.trimRatio,
+      salePrice: values.salePrice,
+    }, {
       totalYield: baseYield,
       usableFlower,
       trim,
@@ -416,14 +442,14 @@ export default function YieldForecastCalculator() {
                       </p>
                     </div>
 
-                    {results.annualRevenue !== null && (
+                    {results.annualRevenue !== null ? (
                       <div className="bg-background rounded-lg p-3 sm:col-span-2">
                         <p className="text-xs text-muted-foreground mb-1">Potential Annual Revenue</p>
                         <p className="text-xl font-bold text-primary">
                           ${results.annualRevenue.toFixed(2)}
                         </p>
                       </div>
-                    )}
+                    ) : null}
                   </div>
                 </div>
               </motion.div>

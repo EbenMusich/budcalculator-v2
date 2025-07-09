@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import { Mail, Send, CheckCircle, AlertCircle } from "lucide-react";
+import { logContactMessage } from "@/lib/actions";
 
 interface FormData {
   name: string;
@@ -60,23 +61,17 @@ export default function ContactPage() {
     setStatus({ type: 'loading', message: 'Sending message...' });
 
     try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbxQflxoYgvoXTKGxRohgMfofvANAo2lZHN2uTgi4NpeWWzUP6ALRVbdckzVL0MB3hvb/exec', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        }),
-      });
+      const result = await logContactMessage(
+        formData.name,
+        formData.email,
+        formData.subject,
+        formData.message
+      );
 
-      if (response.ok) {
+      if (result.success) {
         setStatus({
           type: 'success',
-          message: 'Thanks! Your message has been sent.'
+          message: 'Thanks for reaching out!'
         });
         
         // Clear form
@@ -87,7 +82,10 @@ export default function ContactPage() {
           message: "",
         });
       } else {
-        throw new Error('Failed to send message');
+        setStatus({
+          type: 'error',
+          message: 'Sorry, there was an error sending your message. Please try again.'
+        });
       }
     } catch (error) {
       setStatus({

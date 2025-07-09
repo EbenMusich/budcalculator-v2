@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { ThermometerSun } from "lucide-react";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   weight: string;
@@ -79,7 +80,26 @@ export default function THCLossCalculator() {
     // 6. THC Loss (%)
     const totalLoss = 100 - (finalTHCInBatch / startingTHC) * 100;
 
-    setResults({
+    const calculationResults = {
+      startingTHC,
+      thcAfterDecarb,
+      thcAfterInfusion,
+      finalTHCInBatch,
+      thcPerPiece,
+      totalLoss,
+    };
+
+    setResults(calculationResults);
+
+    // Log usage with all inputs and results
+    logUsage("THC Loss", {
+      weight: values.weight,
+      thcPercent: values.thcPercent,
+      decarbLoss: values.decarbLoss,
+      infusionLoss: values.infusionLoss,
+      bakingLoss: values.bakingLoss,
+      numPieces: values.numPieces,
+    }, {
       startingTHC,
       thcAfterDecarb,
       thcAfterInfusion,
@@ -235,7 +255,7 @@ export default function THCLossCalculator() {
                 Calculate
               </Button>
 
-              {results && (
+              {results ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -287,7 +307,7 @@ export default function THCLossCalculator() {
                     </div>
                   </div>
 
-                  {results.totalLoss > 60 && (
+                  {results.totalLoss > 60 ? (
                     <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
                       <p className="text-destructive font-medium">High THC Loss Detected</p>
                       <p className="text-sm text-muted-foreground mt-1">
@@ -295,9 +315,9 @@ export default function THCLossCalculator() {
                         infusion, or baking processes to retain more potency.
                       </p>
                     </div>
-                  )}
+                  ) : null}
                 </motion.div>
-              )}
+              ) : null}
             </form>
           </CardContent>
         </Card>

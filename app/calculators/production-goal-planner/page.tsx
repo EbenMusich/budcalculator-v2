@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Target } from "lucide-react";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   goalType: "revenue" | "units";
@@ -85,7 +86,29 @@ export default function ProductionGoalPlanner() {
     const grossProfit = estimatedRevenue - totalCOGS;
     const netProfit = grossProfit - laborCost;
 
-    setResults({
+    const calculationResults = {
+      totalUnits,
+      totalBatches,
+      totalTimeHours,
+      estimatedRevenue,
+      totalCOGS,
+      laborCost,
+      grossProfit,
+      netProfit,
+    };
+
+    setResults(calculationResults);
+
+    // Log usage with all inputs and results
+    logUsage("Production Goal Planner", {
+      goalType: inputs.goalType,
+      goalValue: values.goalValue,
+      unitsPerBatch: values.unitsPerBatch,
+      salePricePerUnit: values.salePricePerUnit,
+      materialCostPerUnit: values.materialCostPerUnit,
+      laborHoursPerBatch: values.laborHoursPerBatch,
+      hourlyWage: values.hourlyWage,
+    }, {
       totalUnits,
       totalBatches,
       totalTimeHours,
@@ -282,7 +305,7 @@ export default function ProductionGoalPlanner() {
                 Calculate Production Plan
               </Button>
 
-              {results && (
+              {results ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -354,36 +377,36 @@ export default function ProductionGoalPlanner() {
                         </div>
                       </div>
 
-                      {results.netProfit < 0 && (
+                      {results.netProfit < 0 ? (
                         <div className="mt-6 bg-destructive/10 border border-destructive/20 rounded-lg p-4">
                           <p className="text-destructive font-medium">Negative Net Profit</p>
                           <p className="text-sm text-muted-foreground mt-1">
                             Your total costs exceed revenue. Consider reducing material costs, labor hours, or increasing sale price.
                           </p>
                         </div>
-                      )}
+                      ) : null}
 
-                      {results.netProfit >= 0 && results.netProfit / results.estimatedRevenue < 0.1 && (
+                      {results.netProfit >= 0 && results.netProfit / results.estimatedRevenue < 0.1 ? (
                         <div className="mt-6 bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4">
                           <p className="text-yellow-600 dark:text-yellow-400 font-medium">Low Profit Margin</p>
                           <p className="text-sm text-muted-foreground mt-1">
                             Your net profit margin is below 10%. Consider optimizing costs or pricing strategy.
                           </p>
                         </div>
-                      )}
+                      ) : null}
 
-                      {results.netProfit / results.estimatedRevenue >= 0.2 && (
+                      {results.netProfit / results.estimatedRevenue >= 0.2 ? (
                         <div className="mt-6 bg-green-500/10 border border-green-500/20 rounded-lg p-4">
                           <p className="text-green-600 dark:text-green-400 font-medium">Healthy Profit Margin</p>
                           <p className="text-sm text-muted-foreground mt-1">
                             Excellent profitability! Your net profit margin is above 20%.
                           </p>
                         </div>
-                      )}
+                      ) : null}
                     </CardContent>
                   </Card>
                 </motion.div>
-              )}
+              ) : null}
             </form>
           </CardContent>
         </Card>

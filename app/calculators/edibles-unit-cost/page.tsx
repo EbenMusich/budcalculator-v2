@@ -6,6 +6,7 @@ import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SquareStack } from "lucide-react";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   totalTHC: string;
@@ -79,6 +80,17 @@ export default function EdiblesUnitCostCalculator() {
     const ingredientPerUnit = values.ingredientCost / values.numUnits;
 
     setResults({
+      totalCost,
+      costPerUnit,
+      thcPerUnit,
+      costPerMgTHC,
+      laborCostPerUnit,
+      packagingPerUnit,
+      ingredientPerUnit,
+    });
+    
+    // Log usage
+    logUsage("Edibles Unit Cost", inputs, {
       totalCost,
       costPerUnit,
       thcPerUnit,
@@ -238,7 +250,7 @@ export default function EdiblesUnitCostCalculator() {
                 Calculate
               </Button>
 
-              {results && (
+              {results ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -295,7 +307,7 @@ export default function EdiblesUnitCostCalculator() {
                     </div>
                   </div>
                 </motion.div>
-              )}
+              ) : null}
             </form>
           </CardContent>
         </Card>

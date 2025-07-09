@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { FlaskConical } from "lucide-react";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import { logUsage } from "@/lib/logUsage";
 
 type Mode = "simple" | "advanced";
 type Material = "flower" | "concentrate";
@@ -143,6 +144,16 @@ export default function DecarboxylationCalculator() {
       moistureLoss: adjustedWeight - weightAfterMoisture,
       degradationLoss: totalActiveCannabinoids * degradationDecimal,
     });
+    
+    // Log usage
+    logUsage("Decarboxylation Calculator", inputs, {
+      activatedTHC,
+      activatedCBD,
+      finalPotency,
+      finalWeight: weightAfterMoisture,
+      moistureLoss: adjustedWeight - weightAfterMoisture,
+      degradationLoss: totalActiveCannabinoids * degradationDecimal,
+    });
   };
 
   const inputClasses = "w-full rounded-md bg-background text-foreground px-3 py-2 text-sm ring-1 ring-border/30 focus:ring-2 focus:ring-primary placeholder:text-muted-foreground";
@@ -228,7 +239,7 @@ export default function DecarboxylationCalculator() {
                   />
                 </div>
 
-                {inputs.material === "flower" && (
+                {inputs.material === "flower" ? (
                   <div className="col-span-12 md:col-span-6">
                     <label className="block text-sm font-medium mb-2">
                       THCA Content
@@ -248,7 +259,7 @@ export default function DecarboxylationCalculator() {
                         ))}
                       </SelectContent>
                     </Select>
-                    {(inputs.thcaPreset === "Custom" || !inputs.thcaPreset) && (
+                    {(inputs.thcaPreset === "Custom" || !inputs.thcaPreset) ? (
                       <input
                         type="number"
                         name="thca"
@@ -259,9 +270,9 @@ export default function DecarboxylationCalculator() {
                         required
                         className={`${inputClasses} mt-2`}
                       />
-                    )}
+                    ) : null}
                   </div>
-                )}
+                ) : null}
 
                 <div className="col-span-12 md:col-span-6">
                   <label className="block text-sm font-medium mb-2">
@@ -277,7 +288,7 @@ export default function DecarboxylationCalculator() {
                   />
                 </div>
 
-                {inputs.mode === "advanced" && (
+                {inputs.mode === "advanced" ? (
                   <>
                     <div className="col-span-12 md:col-span-6">
                       <label className="block text-sm font-medium mb-2">
@@ -322,9 +333,9 @@ export default function DecarboxylationCalculator() {
                       />
                     </div>
                   </>
-                )}
+                ) : null}
 
-                {inputs.material === "concentrate" && (
+                {inputs.material === "concentrate" ? (
                   <div className="col-span-12">
                     <label className="block text-sm font-medium mb-2">
                       Concentrate Type
@@ -345,14 +356,14 @@ export default function DecarboxylationCalculator() {
                       </SelectContent>
                     </Select>
                   </div>
-                )}
+                ) : null}
               </div>
 
               <Button type="submit" className="w-full md:w-auto">
                 Calculate
               </Button>
 
-              {results && (
+              {results ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -365,14 +376,14 @@ export default function DecarboxylationCalculator() {
                     </p>
                   </div>
 
-                  {inputs.mode === "advanced" && (
+                  {inputs.mode === "advanced" ? (
                     <div className="bg-muted rounded-lg p-4">
                       <p className="text-sm text-muted-foreground mb-1">Activated CBD</p>
                       <p className="text-2xl font-bold text-primary">
                         {results.activatedCBD.toFixed(2)} mg
                       </p>
                     </div>
-                  )}
+                  ) : null}
 
                   <div className="bg-muted rounded-lg p-4">
                     <p className="text-sm text-muted-foreground mb-1">Final Potency</p>
@@ -388,7 +399,7 @@ export default function DecarboxylationCalculator() {
                     </p>
                   </div>
 
-                  {inputs.mode === "advanced" && (
+                  {inputs.mode === "advanced" ? (
                     <>
                       <div className="bg-muted rounded-lg p-4">
                         <p className="text-sm text-muted-foreground mb-1">Moisture Loss</p>
@@ -404,9 +415,9 @@ export default function DecarboxylationCalculator() {
                         </p>
                       </div>
                     </>
-                  )}
+                  ) : null}
                 </motion.div>
-              )}
+              ) : null}
             </form>
           </CardContent>
         </Card>

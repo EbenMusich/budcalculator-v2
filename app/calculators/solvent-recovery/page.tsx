@@ -6,6 +6,7 @@ import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Droplets, AlertTriangle } from "lucide-react";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   batchSize: string;
@@ -57,7 +58,24 @@ export default function SolventRecoveryCalculator() {
     const totalSolventCost = costOfLostSolvent + values.systemCost;
     const costPerGram = values.batchSize > 0 ? totalSolventCost / values.batchSize : 0;
 
-    setResults({
+    const calculationResults = {
+      recoveryEfficiency,
+      solventLost,
+      costOfLostSolvent,
+      totalSolventCost,
+      costPerGram,
+    };
+
+    setResults(calculationResults);
+
+    // Log usage with all inputs and results
+    logUsage("Solvent Recovery", {
+      batchSize: values.batchSize,
+      solventUsed: values.solventUsed,
+      solventRecovered: values.solventRecovered,
+      solventCostPerLb: values.solventCostPerLb,
+      systemCost: values.systemCost,
+    }, {
       recoveryEfficiency,
       solventLost,
       costOfLostSolvent,
@@ -169,7 +187,7 @@ export default function SolventRecoveryCalculator() {
                 Calculate
               </Button>
 
-              {results && (
+              {results ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -214,7 +232,7 @@ export default function SolventRecoveryCalculator() {
                     </div>
                   </div>
 
-                  {results.recoveryEfficiency < 85 && (
+                  {results.recoveryEfficiency < 85 ? (
                     <div className="flex items-start gap-3 bg-destructive/10 text-destructive rounded-lg p-4">
                       <AlertTriangle className="w-5 h-5 mt-0.5" />
                       <div>
@@ -225,9 +243,9 @@ export default function SolventRecoveryCalculator() {
                         </p>
                       </div>
                     </div>
-                  )}
+                  ) : null}
                 </motion.div>
-              )}
+              ) : null}
             </form>
           </CardContent>
         </Card>

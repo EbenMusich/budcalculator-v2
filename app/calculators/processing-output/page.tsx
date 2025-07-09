@@ -6,6 +6,7 @@ import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PackageCheck } from "lucide-react";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   batchWeight: string;
@@ -79,7 +80,28 @@ export default function ProcessingOutputCalculator() {
     // Cost per unit
     const costPerUnit = totalBatchCost / units;
 
-    setResults({
+    const calculationResults = {
+      adjustedWeight,
+      units,
+      laborCost,
+      totalPackaging,
+      totalBatchCost,
+      costPerUnit,
+    };
+
+    setResults(calculationResults);
+
+    // Log usage with all inputs and results
+    logUsage("Processing Output", {
+      batchWeight: values.batchWeight,
+      materialCost: values.materialCost,
+      gramsPerUnit: values.gramsPerUnit,
+      lossPercent: values.lossPercent,
+      processingHours: values.processingHours,
+      laborRate: values.laborRate,
+      packagingCost: values.packagingCost,
+      testingCost: values.testingCost,
+    }, {
       adjustedWeight,
       units,
       laborCost,
@@ -231,7 +253,7 @@ export default function ProcessingOutputCalculator() {
                 Calculate
               </Button>
 
-              {results && (
+              {results ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -279,7 +301,7 @@ export default function ProcessingOutputCalculator() {
                     </p>
                   </div>
                 </motion.div>
-              )}
+              ) : null}
             </form>
           </CardContent>
         </Card>

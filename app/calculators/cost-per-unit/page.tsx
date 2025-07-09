@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import { Calculator, DollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   labor: string;
@@ -69,6 +70,14 @@ export default function CostPerUnitCalculator() {
     const costPerLight = values.lights > 0 ? totalCost / values.lights : "—";
 
     setResults({
+      costPerGram,
+      costPerPound,
+      costPerPlant,
+      costPerLight,
+    });
+    
+    // Log usage
+    logUsage("Cost Per Unit", inputs, {
       costPerGram,
       costPerPound,
       costPerPlant,
@@ -282,7 +291,7 @@ export default function CostPerUnitCalculator() {
               Calculate Cost Metrics
             </Button>
 
-            {results && (
+            {results ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -326,7 +335,7 @@ export default function CostPerUnitCalculator() {
                   </div>
                 </div>
               </motion.div>
-            )}
+            ) : null}
           </form>
 
           <div className="mt-8">

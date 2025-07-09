@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calculator, Plus, Trash2 } from "lucide-react";
+import { logUsage } from "@/lib/logUsage";
 
 interface SKU {
   id: string;
@@ -214,6 +215,9 @@ export default function CostAllocationCalculator() {
     }
 
     setResults(skuResults);
+    
+    // Log usage
+    logUsage("Cost Allocation Tool", inputs, skuResults);
   };
 
   const inputClasses = "w-full rounded-md bg-background text-foreground px-3 py-2 text-sm ring-1 ring-border/30 focus:ring-2 focus:ring-primary placeholder:text-muted-foreground";

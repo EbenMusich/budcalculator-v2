@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Droplet } from "lucide-react";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   thcPercent: string;
@@ -103,6 +104,13 @@ export default function InfusionDosageCalculator() {
     const thcPerServing = thcInRecipe / values.servings;
 
     setResults({
+      totalTHC: infusedTHC,
+      thcPerServing,
+      potencyPerGram,
+    });
+    
+    // Log usage
+    logUsage("Infusion Dosage", inputs, {
       totalTHC: infusedTHC,
       thcPerServing,
       potencyPerGram,
@@ -223,7 +231,7 @@ export default function InfusionDosageCalculator() {
                   </Select>
                 </div>
 
-                {inputs.solventType === "Custom (enter % below)" && (
+                {inputs.solventType === "Custom (enter % below)" ? (
                   <div className="col-span-12 sm:col-span-6">
                     <label className="block text-sm font-medium mb-2">
                       Custom Solvent Efficiency (%)
@@ -241,7 +249,7 @@ export default function InfusionDosageCalculator() {
                       className={inputClasses}
                     />
                   </div>
-                )}
+                ) : null}
 
                 <div className="col-span-12 sm:col-span-6">
                   <label className="block text-sm font-medium mb-2">
@@ -296,7 +304,7 @@ export default function InfusionDosageCalculator() {
                 Calculate
               </Button>
 
-              {results && (
+              {results ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -323,7 +331,7 @@ export default function InfusionDosageCalculator() {
                     </p>
                   </div>
                 </motion.div>
-              )}
+              ) : null}
             </form>
           </CardContent>
         </Card>

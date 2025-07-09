@@ -6,6 +6,7 @@ import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Clock, AlertTriangle, CheckCircle, XCircle } from "lucide-react";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   laborHours: string;
@@ -127,6 +128,15 @@ export default function LaborCostCalculator() {
       plantsPerHour,
       efficiency,
     });
+    
+    // Log usage
+    logUsage("Labor Cost Plant", inputs, {
+      totalCost,
+      costPerPlant,
+      hoursPerPlant,
+      plantsPerHour,
+      efficiency,
+    });
   };
 
   const inputClasses = "w-full rounded-md bg-background text-foreground px-3 py-2 text-sm ring-1 ring-border/30 focus:ring-2 focus:ring-primary placeholder:text-muted-foreground";
@@ -226,51 +236,48 @@ export default function LaborCostCalculator() {
               </Button>
             </form>
 
-            <AnimatePresence>
-              {results && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className="mt-8 space-y-6"
-                >
-                  <EfficiencyIndicator 
-                    efficiency={results.efficiency} 
-                    costPerPlant={results.costPerPlant} 
-                  />
+            {results && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-8 space-y-6"
+              >
+                <EfficiencyIndicator 
+                  efficiency={results.efficiency} 
+                  costPerPlant={results.costPerPlant} 
+                />
 
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">Total Labor Cost</p>
-                      <p className="text-2xl font-bold text-primary">
-                        ${results.totalCost.toFixed(2)}
-                      </p>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">Labor Cost Per Plant</p>
-                      <p className="text-2xl font-bold text-primary">
-                        ${results.costPerPlant.toFixed(2)}
-                      </p>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">Labor Hours Per Plant</p>
-                      <p className="text-2xl font-bold text-primary">
-                        {results.hoursPerPlant.toFixed(2)} hrs
-                      </p>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">Plants Per Hour</p>
-                      <p className="text-2xl font-bold text-primary">
-                        {results.plantsPerHour.toFixed(2)}
-                      </p>
-                    </div>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="bg-muted rounded-lg p-4">
+                    <p className="text-sm text-muted-foreground mb-1">Total Labor Cost</p>
+                    <p className="text-2xl font-bold text-primary">
+                      ${results.totalCost.toFixed(2)}
+                    </p>
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+
+                  <div className="bg-muted rounded-lg p-4">
+                    <p className="text-sm text-muted-foreground mb-1">Labor Cost Per Plant</p>
+                    <p className="text-2xl font-bold text-primary">
+                      ${results.costPerPlant.toFixed(2)}
+                    </p>
+                  </div>
+
+                  <div className="bg-muted rounded-lg p-4">
+                    <p className="text-sm text-muted-foreground mb-1">Labor Hours Per Plant</p>
+                    <p className="text-2xl font-bold text-primary">
+                      {results.hoursPerPlant.toFixed(2)} hrs
+                    </p>
+                  </div>
+
+                  <div className="bg-muted rounded-lg p-4">
+                    <p className="text-sm text-muted-foreground mb-1">Plants Per Hour</p>
+                    <p className="text-2xl font-bold text-primary">
+                      {results.plantsPerHour.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            )}
           </CardContent>
         </Card>
       </div>

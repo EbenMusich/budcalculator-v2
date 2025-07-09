@@ -6,6 +6,7 @@ import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Candy } from "lucide-react";
+import { logUsage } from "@/lib/logUsage";
 
 interface FormInputs {
   numGummies: string;
@@ -76,6 +77,13 @@ export default function GummyRecipeCalculator() {
     };
 
     setResults({
+      totalTHCNeededMg,
+      distillateRequired,
+      recipe,
+    });
+    
+    // Log usage
+    logUsage("Gummy Recipe Generator", inputs, {
       totalTHCNeededMg,
       distillateRequired,
       recipe,
@@ -169,7 +177,7 @@ export default function GummyRecipeCalculator() {
                 Calculate
               </Button>
 
-              {results && (
+              {results ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -301,7 +309,7 @@ export default function GummyRecipeCalculator() {
                     </CardContent>
                   </Card>
                 </motion.div>
-              )}
+              ) : null}
             </form>
           </CardContent>
         </Card>
