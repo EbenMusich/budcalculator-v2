@@ -66,7 +66,7 @@ export default function ContactPage() {
         email: formData.email,
         subject: formData.subject,
         message: formData.message,
-        timestamp: new Date().toISOString(),
+        submitted_at: new Date().toISOString(),
       };
 
       // Log payload for debugging
