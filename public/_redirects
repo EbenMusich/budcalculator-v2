@@ -1,2 +1,3 @@
 # Netlify redirects for Next.js App Router
-/*    /index.html   200 
+/sitemap.xml  /sitemap.xml  200
+/*            /index.html    200
