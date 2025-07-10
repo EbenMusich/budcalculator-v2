@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import { Mail, Send, CheckCircle, AlertCircle } from "lucide-react";
-import { logContactMessage } from "@/lib/actions";
 
 interface FormData {
   name: string;
@@ -61,14 +60,31 @@ export default function ContactPage() {
     setStatus({ type: 'loading', message: 'Sending message...' });
 
     try {
-      const result = await logContactMessage(
-        formData.name,
-        formData.email,
-        formData.subject,
-        formData.message
-      );
+      // Build payload
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        timestamp: new Date().toISOString(),
+      };
 
-      if (result.success) {
+      // Log payload for debugging
+      console.log('Contact form payload:', payload);
+
+      // Send POST request to Supabase
+      const response = await fetch('https://gvgucgahetbcpdwfivif.supabase.co/rest/v1/contact_messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2Z3VjZ2FoZXRiY3Bkd2ZpdmlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3NzY4MjYsImV4cCI6MjA2NjM1MjgyNn0.Oaca0OnRXR86xbRvm1j6YWUBoPR5Tk4N_qMiuauUC5U',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2Z3VjZ2FoZXRiY3Bkd2ZpdmlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3NzY4MjYsImV4cCI6MjA2NjM1MjgyNn0.Oaca0OnRXR86xbRvm1j6YWUBoPR5Tk4N_qMiuauUC5U',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        alert("Message sent!");
         setStatus({
           type: 'success',
           message: 'Thanks for reaching out!'
@@ -82,12 +98,16 @@ export default function ContactPage() {
           message: "",
         });
       } else {
+        console.error('Contact form submission failed:', response.status, response.statusText);
+        alert("Error sending message");
         setStatus({
           type: 'error',
           message: 'Sorry, there was an error sending your message. Please try again.'
         });
       }
     } catch (error) {
+      console.error('Contact form error:', error);
+      alert("Error sending message");
       setStatus({
         type: 'error',
         message: 'Sorry, there was an error sending your message. Please try again.'
