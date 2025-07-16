@@ -62,9 +62,10 @@ export default function Hero() {
         {/* Featured Calculator Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {featuredCalculators.map((calculator, index) => (
-            <div
+            <Link
               key={calculator.title}
-              className="group bg-secondary/80 backdrop-blur-sm rounded-xl border border-border hover:border-primary/50 transition-all duration-300 p-6 hover:shadow-lg hover:-translate-y-1"
+              href={calculator.href}
+              className="group bg-secondary/80 backdrop-blur-sm rounded-xl border border-border hover:border-primary/50 transition-all duration-300 p-6 hover:shadow-lg hover:-translate-y-1 block"
             >
               <div className="flex items-start gap-4 mb-4">
                 <div className="flex-shrink-0 p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
@@ -80,14 +81,11 @@ export default function Hero() {
                 </div>
               </div>
               
-              <Link
-                href={calculator.href}
-                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium text-sm transition-colors group-hover:gap-3"
-              >
-                Try it
+              <div className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium text-sm transition-colors group-hover:gap-3">
+                Try Calculator
                 <span className="transition-transform group-hover:translate-x-1">→</span>
-              </Link>
-            </div>
+              </div>
+            </Link>
           ))}
         </div>
 
