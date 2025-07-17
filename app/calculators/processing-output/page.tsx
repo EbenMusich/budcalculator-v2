@@ -303,6 +303,17 @@ export default function ProcessingOutputCalculator() {
                 </motion.div>
               ) : null}
             </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Log actual weights for each extract subtype (shatter, resin, sugar, etc.)</li>
+                <li>Ensure batch input and output weights use the same unit (e.g. grams)</li>
+                <li>Track losses during whipping, purging, or jar tek processes</li>
+                <li>Separate outputs by quality tier if relevant (e.g. top shelf vs remelt)</li>
+                <li>Round all totals conservatively to avoid overstating yield</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </div>

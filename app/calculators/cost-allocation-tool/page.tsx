@@ -535,6 +535,17 @@ export default function CostAllocationCalculator() {
                 </motion.div>
               )}
             </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Use actual yield data by type — don't rely on estimated ratios</li>
+                <li>Choose weight-based or market-based allocation based on your tracking method</li>
+                <li>Avoid applying discounts to cost — allocate before discounting revenue</li>
+                <li>Ensure your "total cost of operation" includes overhead, not just variable costs</li>
+                <li>Run this regularly to monitor margin changes between SKUs</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </div>

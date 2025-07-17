@@ -419,6 +419,17 @@ export default function DecarboxylationCalculator() {
                 </motion.div>
               ) : null}
             </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Choose the correct decarb method: oven (240°F/115°C for 30-40 min) or sous vide (203°F/95°C for 90 min)</li>
+                <li>Understand that THCA converts to THC at ~87% efficiency under optimal conditions</li>
+                <li>Ensure oven temperature accuracy - even 10°F difference can significantly impact conversion rates</li>
+                <li>Avoid terpene loss by using lower temperatures and shorter times for flavor preservation</li>
+                <li>Adjust for different material types: trim (lower efficiency), kief (higher efficiency), concentrates (varies by type)</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </div>

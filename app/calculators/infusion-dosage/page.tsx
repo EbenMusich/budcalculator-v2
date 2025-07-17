@@ -333,6 +333,17 @@ export default function InfusionDosageCalculator() {
                 </motion.div>
               ) : null}
             </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Use lab-tested potency data for your cannabis material when possible</li>
+                <li>Choose the correct decarb efficiency based on your method (oven, jar, already decarbed)</li>
+                <li>Use the actual infused volume (in grams or ml) for your total — not estimated loss</li>
+                <li>Adjust for infusion efficiency based on the solvent used (e.g., MCT oil vs butter)</li>
+                <li>If mixing batches, recalculate based on total weight and average potency</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </div>

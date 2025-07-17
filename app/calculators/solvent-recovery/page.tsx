@@ -247,6 +247,17 @@ export default function SolventRecoveryCalculator() {
                 </motion.div>
               ) : null}
             </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Always weigh solvent input and recovered volume using calibrated equipment</li>
+                <li>Record solvent loss per run to identify leaks or inefficiencies</li>
+                <li>Account for residual solvent remaining in the biomass or collection vessel</li>
+                <li>Run multiple tests to establish a reliable average recovery percentage</li>
+                <li>Separate propane and butane tracking if running a blended system</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </div>

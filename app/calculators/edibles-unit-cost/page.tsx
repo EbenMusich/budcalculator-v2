@@ -309,6 +309,17 @@ export default function EdiblesUnitCostCalculator() {
                 </motion.div>
               ) : null}
             </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Make sure batch size and total units are based on the final, trimmed, and portioned product count</li>
+                <li>Use current ingredient prices (including active cannabinoids) — not outdated estimates</li>
+                <li>Don't forget to include packaging, testing, and labor time for each batch</li>
+                <li>Track labor as total minutes and convert to an hourly wage for consistency</li>
+                <li>For best results, average cost data across multiple production runs</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </div>

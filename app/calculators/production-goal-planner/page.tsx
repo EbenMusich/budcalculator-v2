@@ -408,6 +408,17 @@ export default function ProductionGoalPlanner() {
                 </motion.div>
               ) : null}
             </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Set unit targets based on past averages, not ideal conditions</li>
+                <li>Factor in employee availability and shift lengths when calculating goals</li>
+                <li>Use product-specific units per hour (UPH) to avoid overloading teams</li>
+                <li>Don't forget to subtract break time from total available labor hours</li>
+                <li>Revisit goals weekly or monthly to reflect changes in demand or staffing</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </div>

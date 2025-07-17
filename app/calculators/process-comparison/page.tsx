@@ -390,6 +390,17 @@ export default function ProcessComparisonCalculator() {
                 </motion.div>
               ) : null}
             </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Use actual logged times from multiple batches for each process</li>
+                <li>Always use the same unit count and product type when comparing runs</li>
+                <li>Include all labor costs — even setup/cleanup — for both processes</li>
+                <li>Keep consumable cost estimates realistic by reviewing invoices</li>
+                <li>Double-check worker count inputs to reflect who's active per process</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </div>

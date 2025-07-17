@@ -278,6 +278,17 @@ export default function LaborCostCalculator() {
                 </div>
               </motion.div>
             )}
+
+          <div className="mt-8">
+            <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+            <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+              <li>Use actual logged labor hours from multiple batches, not estimates.</li>
+              <li>Only include labor time directly tied to plant work (e.g. pruning, defoliation, transplanting).</li>
+              <li>Divide total time by only the plants handled during that session — not total in room.</li>
+              <li>Track break time separately to avoid inflating costs.</li>
+              <li>Update labor rate as wages or staffing structures change.</li>
+            </ul>
+          </div>
           </CardContent>
         </Card>
       </div>

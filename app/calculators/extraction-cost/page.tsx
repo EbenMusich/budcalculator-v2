@@ -339,6 +339,17 @@ export default function ExtractionCostCalculator() {
                 </motion.div>
               ) : null}
             </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Track solvent input by batch (butane/propane per run) to calculate actual usage</li>
+                <li>Account for loss and evaporation when measuring final output weight</li>
+                <li>Separate labor by extraction type (CRC vs. live resin) for accurate cost allocation</li>
+                <li>Use accurate weights per sock or material unit for consistent measurements</li>
+                <li>Include filter media or post-processing costs if applicable to your process</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </div>

@@ -370,6 +370,17 @@ export default function SOPTimeTracker() {
                 </motion.div>
               ) : null}
             </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Make sure start and end times are recorded in real-time — not from memory</li>
+                <li>Always subtract break time to avoid inflating productivity metrics</li>
+                <li>Track units completed per task type to establish clear UPH benchmarks</li>
+                <li>Include all setup and cleanup time in the total</li>
+                <li>Log the employee name and SOP name for future performance analysis</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </div>

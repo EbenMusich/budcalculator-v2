@@ -453,6 +453,17 @@ export default function ProfitMarginCalculator() {
                 </motion.div>
               ) : null}
             </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Include all cost components: base COGS, packaging, testing, labor, and taxes</li>
+                <li>Adjust sale price to reflect discounts and real-world channel fees</li>
+                <li>Use average values across multiple batches for more reliable margins</li>
+                <li>Don't forget to include excise or compliance costs where applicable</li>
+                <li>Recalculate regularly — market prices and ingredient costs change fast</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </section>

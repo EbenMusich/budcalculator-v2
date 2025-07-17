@@ -311,6 +311,17 @@ export default function GummyRecipeCalculator() {
                 </motion.div>
               ) : null}
             </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Use lab-tested potency values for distillate or concentrate when possible</li>
+                <li>Always measure distillate in milligrams or grams — not by volume</li>
+                <li>Make sure the total batch size accounts for liquid loss during heating or mixing</li>
+                <li>Test a small batch first if you're unsure how your mold or emulsifier behaves</li>
+                <li>For consistent dosing, stir well before pouring and avoid overfilling molds</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </div>

@@ -319,6 +319,17 @@ export default function THCLossCalculator() {
                 </motion.div>
               ) : null}
             </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Use realistic decarb efficiency based on your oven setup and material type</li>
+                <li>Account for THC degradation from prolonged high heat (especially above 240°F)</li>
+                <li>Baking can cause additional cannabinoid loss — track time and temperature carefully</li>
+                <li>Use potency testing or prior batch results to calibrate your assumptions</li>
+                <li>Record strain-specific or process-specific loss rates for future improvement</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </div>
