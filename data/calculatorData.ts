@@ -1,5 +1,23 @@
 export const calculators = [
   {
+    slug: "discount-strategy",
+    name: "Discount Strategy Simulator",
+    description: "Model how discounts affect margins and the sales volume needed to stay profitable.",
+    category: "Retail",
+  },
+  {
+    slug: "profit-per-menu-slot",
+    name: "Profit-Per-Menu-Slot Calculator",
+    description: "Rank products by margin × velocity to see which SKUs truly earn their shelf space.",
+    category: "Retail",
+  },
+  {
+    slug: "bundle-builder",
+    name: "Bundle Builder + Margin Viewer",
+    description: "Build product bundles and calculate total margin, customer savings, and bundle efficiency.",
+    category: "Retail",
+  },
+  {
     slug: "cost-per-unit",
     name: "Cost Per Unit Calculator",
     description: "Calculate production costs per unit for better pricing decisions",

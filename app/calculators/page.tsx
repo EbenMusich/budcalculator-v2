@@ -7,7 +7,7 @@ import Layout from "@/components/Layout";
 import { Calculator, Leaf, FlaskConical, PieChart } from "lucide-react";
 import { calculators } from "@/data/calculatorData";
 
-type Category = "All" | "Cultivation" | "Extraction" | "Edibles" | "Business";
+type Category = "All" | "Cultivation" | "Extraction" | "Edibles" | "Business" | "Retail";
 
 export default function CalculatorsPage() {
   const searchParams = useSearchParams();
@@ -30,7 +30,7 @@ export default function CalculatorsPage() {
         </div>
 
         <div className="flex justify-center flex-wrap gap-3 mb-10">
-          {["All", "Cultivation", "Extraction", "Edibles", "Business"].map((cat) => (
+          {["All", "Cultivation", "Extraction", "Edibles", "Business", "Retail"].map((cat) => (
             <button
               key={cat}
               onClick={() => setCategory(cat as Category)}
