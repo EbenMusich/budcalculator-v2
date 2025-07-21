@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, TrendingUp, Zap, FlaskConical, Candy, DollarSign, Flame } from "lucide-react";
+import { Calculator, TrendingUp, Zap, FlaskConical, Candy, DollarSign, Flame, CheckCircle } from "lucide-react";
 
 export default function Hero() {
   const featuredCalculators = [
@@ -41,6 +41,14 @@ export default function Hero() {
     },
   ];
 
+  const explainerPoints = [
+    "Optimize production costs and maximize profitability",
+    "Calculate precise dosages for infused products",
+    "Forecast yields and plan harvest schedules",
+    "Analyze extraction efficiency and costs",
+    "Determine optimal pricing strategies"
+  ];
+
   return (
     <div className="relative overflow-hidden">
       {/* Background Gradient */}
@@ -59,8 +67,73 @@ export default function Hero() {
           </p>
         </div>
 
+        {/* Explainer Section */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-semibold text-foreground text-center mb-8">
+            What You Can Do Here
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {explainerPoints.map((point, index) => (
+              <div key={index} className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                <p className="text-gray-600 leading-relaxed">{point}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center mb-12">
+          <Link
+            href="/calculators"
+            className="inline-flex items-center gap-3 bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-xl text-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+          >
+            <Calculator className="w-6 h-6" />
+            View All Calculators
+          </Link>
+          <p className="text-sm text-muted-foreground mt-4">
+            18+ professional calculators • Free to use • No registration required
+          </p>
+        </div>
+
+        {/* How It Works Section */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-semibold text-foreground text-center mb-8">
+            How It Works
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-primary font-semibold text-lg">1</span>
+              </div>
+              <h3 className="text-lg font-medium text-foreground mb-3">Choose a calculator</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Each one solves a specific task — costing, yield, time tracking, pricing, and more.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-primary font-semibold text-lg">2</span>
+              </div>
+              <h3 className="text-lg font-medium text-foreground mb-3">Enter your data</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Try your real numbers or experiment with scenarios. Instant results, no waiting.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-primary font-semibold text-lg">3</span>
+              </div>
+              <h3 className="text-lg font-medium text-foreground mb-3">Use it however you want</h3>
+              <p className="text-gray-600 leading-relaxed">
+                No signup, no tracking, no limits. Just insights you can use today.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Featured Calculator Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredCalculators.map((calculator, index) => (
             <Link
               key={calculator.title}
@@ -87,20 +160,6 @@ export default function Hero() {
               </div>
             </Link>
           ))}
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center">
-          <Link
-            href="/calculators"
-            className="inline-flex items-center gap-3 bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-xl text-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-          >
-            <Calculator className="w-6 h-6" />
-            View All Calculators
-          </Link>
-          <p className="text-sm text-muted-foreground mt-4">
-            18+ professional calculators • Free to use • No registration required
-          </p>
         </div>
       </div>
     </div>
