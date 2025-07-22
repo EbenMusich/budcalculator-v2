@@ -11,6 +11,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
+  // ✅ Skip age gate for .html files
+  if (request.nextUrl.pathname.endsWith('.html')) {
+    return NextResponse.next()
+  }
+
   // ✅ Allow if cookie shows age verified
   if (ageVerified) {
     return NextResponse.next()
