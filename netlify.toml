@@ -3,4 +3,129 @@
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "18" 
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/break-even.html"
+  to = "/calculators/break-even"
+  status = 301
+
+[[redirects]]
+  from = "/cost-allocation-tool.html"
+  to = "/calculators/cost-allocation-tool"
+  status = 301
+
+[[redirects]]
+  from = "/cost-per-unit.html"
+  to = "/calculators/cost-per-unit"
+  status = 301
+
+[[redirects]]
+  from = "/decarboxylation-calculator.html"
+  to = "/calculators/decarboxylation-calculator"
+  status = 301
+
+[[redirects]]
+  from = "/edibles-unit-cost.html"
+  to = "/calculators/edibles-unit-cost"
+  status = 301
+
+[[redirects]]
+  from = "/extraction-cost.html"
+  to = "/calculators/extraction-cost"
+  status = 301
+
+[[redirects]]
+  from = "/gummy-recipe.html"
+  to = "/calculators/gummy-recipe"
+  status = 301
+
+[[redirects]]
+  from = "/infusion-dosage.html"
+  to = "/calculators/infusion-dosage"
+  status = 301
+
+[[redirects]]
+  from = "/labor-cost-plant.html"
+  to = "/calculators/labor-cost-plant"
+  status = 301
+
+[[redirects]]
+  from = "/lighting-cost.html"
+  to = "/calculators/lighting-cost"
+  status = 301
+
+[[redirects]]
+  from = "/process-comparison.html"
+  to = "/calculators/process-comparison"
+  status = 301
+
+[[redirects]]
+  from = "/processing-output.html"
+  to = "/calculators/processing-output"
+  status = 301
+
+[[redirects]]
+  from = "/production-goal-planner.html"
+  to = "/calculators/production-goal-planner"
+  status = 301
+
+[[redirects]]
+  from = "/profit-margin.html"
+  to = "/calculators/profit-margin"
+  status = 301
+
+[[redirects]]
+  from = "/solvent-recovery.html"
+  to = "/calculators/solvent-recovery"
+  status = 301
+
+[[redirects]]
+  from = "/sop-time-tracker.html"
+  to = "/calculators/sop-time-tracker"
+  status = 301
+
+[[redirects]]
+  from = "/thc-loss.html"
+  to = "/calculators/thc-loss"
+  status = 301
+
+[[redirects]]
+  from = "/yield-forecasting.html"
+  to = "/calculators/yield-forecasting"
+  status = 301
+
+[[redirects]]
+  from = "/calculators.html"
+  to = "/calculators"
+  status = 301
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/resources.html"
+  to = "/resources"
+  status = 301
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/age-gate.html"
+  to = "/age-gate"
+  status = 301
+
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms"
+  status = 301
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy"
+  status = 301
