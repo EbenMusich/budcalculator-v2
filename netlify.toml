@@ -96,6 +96,21 @@
   status = 301
 
 [[redirects]]
+  from = "/bundle-builder.html"
+  to = "/calculators/bundle-builder"
+  status = 301
+
+[[redirects]]
+  from = "/discount-strategy.html"
+  to = "/calculators/discount-strategy"
+  status = 301
+
+[[redirects]]
+  from = "/profit-per-menu-slot.html"
+  to = "/calculators/profit-per-menu-slot"
+  status = 301
+
+[[redirects]]
   from = "/calculators.html"
   to = "/calculators"
   status = 301
