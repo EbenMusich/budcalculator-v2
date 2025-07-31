@@ -19,7 +19,8 @@ export default function AgeVerification() {
     
     if (!is21Confirmed) {
       // Store the current path with query params for redirect after age gate
-      const currentPath = pathname + searchParams.toString();
+      const queryString = searchParams.toString();
+      const currentPath = queryString ? `${pathname}?${queryString}` : pathname;
       localStorage.setItem("postAgeGateRedirect", currentPath);
       
       // Redirect to age gate
