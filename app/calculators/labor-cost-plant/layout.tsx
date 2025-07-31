@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     url: "https://budcalculator.com/pages/labor-cost-plant",
     images: [
       {
-        url: "/assets/preview.png",
+        url: "https://budcalculator.com/assets/preview.png",
         width: 1200,
         height: 630,
         alt: "BUD Calculator – Cannabis Tools",
@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Labor Cost per Plant Calculator | BUD Calculator",
     description: "Track and optimize labor costs across cultivation cycles. Calculate labor expenses per plant, per square foot, and per harvest to improve operational efficiency.",
-    images: ["/assets/preview.png"],
+    images: ["https://budcalculator.com/assets/preview.png"],
   },
   alternates: {
-    canonical: "https://budcalculator.com/pages/labor-cost-plant",
+    canonical: "https://budcalculator.com/calculators/labor-cost-plant",
   },
 };
 

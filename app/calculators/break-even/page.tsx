@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Head from "next/head";
 import Layout from "@/components/Layout";
 import { Calculator, DollarSign, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -98,217 +99,242 @@ export default function BreakEvenCalculator() {
   const inputClasses = "w-full rounded-md bg-background text-foreground px-3 py-2 text-sm ring-1 ring-border/30 focus:ring-2 focus:ring-primary placeholder:text-muted-foreground";
 
   return (
-    <Layout>
-      <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="border border-border bg-secondary rounded-2xl shadow p-6 lg:p-8">
-          <div className="flex items-center gap-3 mb-4">
-            <Calculator className="w-6 h-6 text-primary" />
-            <h1 className="text-3xl font-bold">Break-even Calculator</h1>
-          </div>
-          <p className="text-muted-foreground mb-8">
-            Calculate your break-even point and cost allocation across different product grades.
-            This tool helps you understand your true costs and optimal pricing strategy for each
-            product category.
-          </p>
-
-          <form onSubmit={calculateResults} className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium mb-2">
-                  <div className="flex items-center gap-2">
-                    <DollarSign className="w-4 h-4" />
-                    Total Cost of Operation ($)
-                  </div>
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
-                  <input
-                    type="number"
-                    name="totalCost"
-                    value={inputs.totalCost}
-                    onChange={handleInputChange}
-                    placeholder="50000"
-                    className={`pl-8 ${inputClasses} ${
-                      !isValidInput(inputs.totalCost) ? 'ring-1 ring-destructive' : ''
-                    }`}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  <div className="flex items-center gap-2">
-                    <Leaf className="w-4 h-4" />
-                    Premium Flower Yield (lbs)
-                  </div>
-                </label>
-                <input
-                  type="number"
-                  name="yieldPremium"
-                  value={inputs.yieldPremium}
-                  onChange={handleInputChange}
-                  placeholder="0"
-                  className={inputClasses}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  <div className="flex items-center gap-2">
-                    <Leaf className="w-4 h-4" />
-                    Smalls Yield (lbs)
-                  </div>
-                </label>
-                <input
-                  type="number"
-                  name="yieldSmalls"
-                  value={inputs.yieldSmalls}
-                  onChange={handleInputChange}
-                  placeholder="0"
-                  className={inputClasses}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  <div className="flex items-center gap-2">
-                    <Leaf className="w-4 h-4" />
-                    Trim Yield (lbs)
-                  </div>
-                </label>
-                <input
-                  type="number"
-                  name="yieldTrim"
-                  value={inputs.yieldTrim}
-                  onChange={handleInputChange}
-                  placeholder="0"
-                  className={inputClasses}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  <div className="flex items-center gap-2">
-                    <DollarSign className="w-4 h-4" />
-                    Premium Flower Price ($/lb)
-                  </div>
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
-                  <input
-                    type="number"
-                    name="pricePremium"
-                    value={inputs.pricePremium}
-                    onChange={handleInputChange}
-                    placeholder="0"
-                    className={`pl-8 ${inputClasses}`}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  <div className="flex items-center gap-2">
-                    <DollarSign className="w-4 h-4" />
-                    Smalls Price ($/lb)
-                  </div>
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
-                  <input
-                    type="number"
-                    name="priceSmalls"
-                    value={inputs.priceSmalls}
-                    onChange={handleInputChange}
-                    placeholder="0"
-                    className={`pl-8 ${inputClasses}`}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  <div className="flex items-center gap-2">
-                    <DollarSign className="w-4 h-4" />
-                    Trim Price ($/lb)
-                  </div>
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
-                  <input
-                    type="number"
-                    name="priceTrim"
-                    value={inputs.priceTrim}
-                    onChange={handleInputChange}
-                    placeholder="0"
-                    className={`pl-8 ${inputClasses}`}
-                  />
-                </div>
-              </div>
+    <>
+      <Head>
+        <link rel="canonical" href="https://budcalculator.com/calculators/break-even" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Break-even Calculator",
+            "url": "https://budcalculator.com/calculators/break-even",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "description": "Calculate the true break-even cost per gram and per pound for cannabis flower, smalls, and trim based on your total operation cost and yields.",
+            "creator": {
+              "@type": "Organization",
+              "name": "BUD Calculator"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "0.00",
+              "priceCurrency": "USD"
+            }
+          })
+        }} />
+      </Head>
+      <Layout>
+        <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="border border-border bg-secondary rounded-2xl shadow p-6 lg:p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <Calculator className="w-6 h-6 text-primary" />
+              <h1 className="text-3xl font-bold">Break-even Calculator</h1>
             </div>
+            <p className="text-muted-foreground mb-8">
+              Calculate your break-even point and cost allocation across different product grades.
+              This tool helps you understand your true costs and optimal pricing strategy for each
+              product category.
+            </p>
 
-            <Button type="submit" className="w-full sm:w-auto">
-              Calculate
-            </Button>
+            <form onSubmit={calculateResults} className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium mb-2">
+                    <div className="flex items-center gap-2">
+                      <DollarSign className="w-4 h-4" />
+                      Total Cost of Operation ($)
+                    </div>
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                    <input
+                      type="number"
+                      name="totalCost"
+                      value={inputs.totalCost}
+                      onChange={handleInputChange}
+                      placeholder="50000"
+                      className={`pl-8 ${inputClasses} ${
+                        !isValidInput(inputs.totalCost) ? 'ring-1 ring-destructive' : ''
+                      }`}
+                    />
+                  </div>
+                </div>
 
-            {results ? (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="space-y-4"
-              >
-                {results.map((result) => (
-                  <div key={result.name} className="bg-muted/50 rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-4 text-primary">{result.name}</h3>
-                    
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                      <div className="bg-background rounded-lg p-3">
-                        <p className="text-xs text-muted-foreground mb-1">Cost Share</p>
-                        <p className="text-lg font-bold text-primary">
-                          ${result.costShare.toFixed(2)}
-                        </p>
-                      </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    <div className="flex items-center gap-2">
+                      <Leaf className="w-4 h-4" />
+                      Premium Flower Yield (lbs)
+                    </div>
+                  </label>
+                  <input
+                    type="number"
+                    name="yieldPremium"
+                    value={inputs.yieldPremium}
+                    onChange={handleInputChange}
+                    placeholder="0"
+                    className={inputClasses}
+                  />
+                </div>
 
-                      <div className="bg-background rounded-lg p-3">
-                        <p className="text-xs text-muted-foreground mb-1">Cost per lb</p>
-                        <p className="text-lg font-bold text-primary">
-                          ${result.costPerLb.toFixed(2)}
-                        </p>
-                      </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    <div className="flex items-center gap-2">
+                      <Leaf className="w-4 h-4" />
+                      Smalls Yield (lbs)
+                    </div>
+                  </label>
+                  <input
+                    type="number"
+                    name="yieldSmalls"
+                    value={inputs.yieldSmalls}
+                    onChange={handleInputChange}
+                    placeholder="0"
+                    className={inputClasses}
+                  />
+                </div>
 
-                      <div className="bg-background rounded-lg p-3">
-                        <p className="text-xs text-muted-foreground mb-1">Cost per gram</p>
-                        <p className="text-lg font-bold text-primary">
-                          ${result.costPerGram.toFixed(2)}
-                        </p>
-                      </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    <div className="flex items-center gap-2">
+                      <Leaf className="w-4 h-4" />
+                      Trim Yield (lbs)
+                    </div>
+                  </label>
+                  <input
+                    type="number"
+                    name="yieldTrim"
+                    value={inputs.yieldTrim}
+                    onChange={handleInputChange}
+                    placeholder="0"
+                    className={inputClasses}
+                  />
+                </div>
 
-                      <div className="bg-background rounded-lg p-3">
-                        <p className="text-xs text-muted-foreground mb-1">Margin per lb</p>
-                        <p className={`text-lg font-bold ${
-                          result.marginPerLb >= 0 ? 'text-green-500' : 'text-red-500'
-                        }`}>
-                          ${result.marginPerLb.toFixed(2)}
-                        </p>
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    <div className="flex items-center gap-2">
+                      <DollarSign className="w-4 h-4" />
+                      Premium Flower Price ($/lb)
+                    </div>
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                    <input
+                      type="number"
+                      name="pricePremium"
+                      value={inputs.pricePremium}
+                      onChange={handleInputChange}
+                      placeholder="0"
+                      className={`pl-8 ${inputClasses}`}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    <div className="flex items-center gap-2">
+                      <DollarSign className="w-4 h-4" />
+                      Smalls Price ($/lb)
+                    </div>
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                    <input
+                      type="number"
+                      name="priceSmalls"
+                      value={inputs.priceSmalls}
+                      onChange={handleInputChange}
+                      placeholder="0"
+                      className={`pl-8 ${inputClasses}`}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    <div className="flex items-center gap-2">
+                      <DollarSign className="w-4 h-4" />
+                      Trim Price ($/lb)
+                    </div>
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                    <input
+                      type="number"
+                      name="priceTrim"
+                      value={inputs.priceTrim}
+                      onChange={handleInputChange}
+                      placeholder="0"
+                      className={`pl-8 ${inputClasses}`}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <Button type="submit" className="w-full sm:w-auto">
+                Calculate
+              </Button>
+
+              {results ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="space-y-4"
+                >
+                  {results.map((result) => (
+                    <div key={result.name} className="bg-muted/50 rounded-lg p-6">
+                      <h3 className="text-xl font-bold mb-4 text-primary">{result.name}</h3>
+                      
+                      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div className="bg-background rounded-lg p-3">
+                          <p className="text-xs text-muted-foreground mb-1">Cost Share</p>
+                          <p className="text-lg font-bold text-primary">
+                            ${result.costShare.toFixed(2)}
+                          </p>
+                        </div>
+
+                        <div className="bg-background rounded-lg p-3">
+                          <p className="text-xs text-muted-foreground mb-1">Cost per lb</p>
+                          <p className="text-lg font-bold text-primary">
+                            ${result.costPerLb.toFixed(2)}
+                          </p>
+                        </div>
+
+                        <div className="bg-background rounded-lg p-3">
+                          <p className="text-xs text-muted-foreground mb-1">Cost per gram</p>
+                          <p className="text-lg font-bold text-primary">
+                            ${result.costPerGram.toFixed(2)}
+                          </p>
+                        </div>
+
+                        <div className="bg-background rounded-lg p-3">
+                          <p className="text-xs text-muted-foreground mb-1">Margin per lb</p>
+                          <p className={`text-lg font-bold ${
+                            result.marginPerLb >= 0 ? 'text-green-500' : 'text-red-500'
+                          }`}>
+                            ${result.marginPerLb.toFixed(2)}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </motion.div>
-            ) : null}
-          </form>
+                  ))}
+                </motion.div>
+              ) : null}
+            </form>
 
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
-            <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-              <li>Include all operational costs: labor, utilities, supplies, etc.</li>
-              <li>Account for seasonal yield variations in your estimates</li>
-              <li>Consider market prices when setting target prices</li>
-              <li>Regular recalculation is recommended as costs and yields change</li>
-            </ul>
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Include all operational costs: labor, utilities, supplies, etc.</li>
+                <li>Account for seasonal yield variations in your estimates</li>
+                <li>Consider market prices when setting target prices</li>
+                <li>Regular recalculation is recommended as costs and yields change</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 }

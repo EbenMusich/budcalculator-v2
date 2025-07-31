@@ -7,24 +7,25 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Break-even Calculator | BUD Calculator",
     description: "Determine your break-even point and optimal pricing strategy for cannabis products. Calculate when your business becomes profitable with fixed costs, variable costs, and revenue analysis.",
-    url: "https://budcalculator.com/pages/break-even",
+    url: "https://budcalculator.com/calculators/break-even",
     images: [
       {
-        url: "/assets/preview.png",
+        url: "https://budcalculator.com/assets/preview.png",
         width: 1200,
         height: 630,
         alt: "BUD Calculator – Cannabis Tools",
       },
     ],
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Break-even Calculator | BUD Calculator",
     description: "Determine your break-even point and optimal pricing strategy for cannabis products. Calculate when your business becomes profitable.",
-    images: ["/assets/preview.png"],
+    images: ["https://budcalculator.com/assets/preview.png"],
   },
   alternates: {
-    canonical: "https://budcalculator.com/pages/break-even",
+    canonical: "https://budcalculator.com/calculators/break-even",
   },
 };
 

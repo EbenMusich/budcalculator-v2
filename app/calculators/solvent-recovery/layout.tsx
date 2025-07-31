@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     url: "https://budcalculator.com/pages/solvent-recovery",
     images: [
       {
-        url: "/assets/preview.png",
+        url: "https://budcalculator.com/assets/preview.png",
         width: 1200,
         height: 630,
         alt: "BUD Calculator – Cannabis Tools",
@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Solvent Recovery Calculator | BUD Calculator",
     description: "Calculate solvent recovery rates and replacement costs for cannabis extraction. Optimize solvent usage, track recovery efficiency, and reduce operational costs in your extraction processes.",
-    images: ["/assets/preview.png"],
+    images: ["https://budcalculator.com/assets/preview.png"],
   },
   alternates: {
-    canonical: "https://budcalculator.com/pages/solvent-recovery",
+    canonical: "https://budcalculator.com/calculators/solvent-recovery",
   },
 };
 

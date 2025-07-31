@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     url: "https://budcalculator.com/pages/processing-output",
     images: [
       {
-        url: "/assets/preview.png",
+        url: "https://budcalculator.com/assets/preview.png",
         width: 1200,
         height: 630,
         alt: "BUD Calculator – Cannabis Tools",
@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Processing Output Calculator | BUD Calculator",
     description: "Estimate processing output and material requirements for cannabis extraction and manufacturing. Calculate expected yields, material needs, and production capacity for efficient planning.",
-    images: ["/assets/preview.png"],
+    images: ["https://budcalculator.com/assets/preview.png"],
   },
   alternates: {
-    canonical: "https://budcalculator.com/pages/processing-output",
+    canonical: "https://budcalculator.com/calculators/processing-output",
   },
 };
 

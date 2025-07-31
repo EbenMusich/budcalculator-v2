@@ -1,30 +1,31 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Edibles Cost Per Unit Calculator | BUD Calculator",
-  description: "Estimate your edible cost per unit using ingredient, labor, and packaging inputs. Perfect for gummies, chocolates, and tinctures. Calculate cost per mg of THC for accurate pricing.",
-  keywords: "edibles cost calculator, cannabis edibles pricing, gummy cost calculator, THC cost per unit, edible production cost",
+  title: "Edibles Unit Cost Calculator | BUD Calculator",
+  description: "Calculate the true cost per unit for cannabis edibles. Factor in ingredients, labor, packaging, and overhead to determine accurate pricing for your edible products.",
+  keywords: "edibles cost calculator, cannabis edibles pricing, marijuana edibles cost, edible unit cost calculator, cannabis edibles production cost",
   openGraph: {
-    title: "Edibles Cost Per Unit Calculator | BUD Calculator",
-    description: "Estimate your edible cost per unit using ingredient, labor, and packaging inputs. Perfect for gummies, chocolates, and tinctures. Calculate cost per mg of THC for accurate pricing.",
-    url: "https://budcalculator.com/pages/edibles-unit-cost",
+    title: "Edibles Unit Cost Calculator | BUD Calculator",
+    description: "Calculate the true cost per unit for cannabis edibles. Factor in ingredients, labor, packaging, and overhead to determine accurate pricing for your edible products.",
+    url: "https://budcalculator.com/calculators/edibles-unit-cost",
     images: [
       {
-        url: "/assets/preview.png",
+        url: "https://budcalculator.com/assets/preview.png",
         width: 1200,
         height: 630,
         alt: "BUD Calculator – Cannabis Tools",
       },
     ],
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Edibles Cost Per Unit Calculator | BUD Calculator",
-    description: "Estimate cost per unit and cost per mg of THC using your production inputs.",
-    images: ["/assets/preview.png"],
+    title: "Edibles Unit Cost Calculator | BUD Calculator",
+    description: "Calculate the true cost per unit for cannabis edibles. Factor in ingredients, labor, packaging, and overhead to determine accurate pricing.",
+    images: ["https://budcalculator.com/assets/preview.png"],
   },
   alternates: {
-    canonical: "https://budcalculator.com/pages/edibles-unit-cost",
+    canonical: "https://budcalculator.com/calculators/edibles-unit-cost",
   },
 };
 

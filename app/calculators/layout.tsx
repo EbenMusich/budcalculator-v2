@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     url: "https://budcalculator.com/calculators",
     images: [
       {
-        url: "/assets/preview.png",
+        url: "https://budcalculator.com/assets/preview.png",
         width: 1200,
         height: 630,
         alt: "BUD Calculator - Cannabis Business Tools",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Cannabis Business Calculators | BUD Calculator",
     description: "Professional cannabis business calculators for cultivation, extraction, edibles, and business operations.",
-    images: ["/assets/preview.png"],
+    images: ["https://budcalculator.com/assets/preview.png"],
   },
   alternates: {
     canonical: "https://budcalculator.com/calculators",

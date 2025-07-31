@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     url: "https://budcalculator.com/pages/sop-time-tracker",
     images: [
       {
-        url: "/assets/preview.png",
+        url: "https://budcalculator.com/assets/preview.png",
         width: 1200,
         height: 630,
         alt: "BUD Calculator – Cannabis Tools",
@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SOP Time Tracker | BUD Calculator",
     description: "Track labor time spent on SOPs by task and employee. Optimize productivity in your cannabis operation.",
-    images: ["/assets/preview.png"],
+    images: ["https://budcalculator.com/assets/preview.png"],
   },
   alternates: {
-    canonical: "https://budcalculator.com/pages/sop-time-tracker",
+    canonical: "https://budcalculator.com/calculators/sop-time-tracker",
   },
 };
 

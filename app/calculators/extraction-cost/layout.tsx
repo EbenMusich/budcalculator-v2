@@ -7,24 +7,25 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Extraction Cost Calculator | BUD Calculator",
     description: "Calculate costs and efficiency of extraction processes. Compare CO2, ethanol, hydrocarbon, and other extraction methods to determine the most cost-effective approach for your cannabis concentrates.",
-    url: "https://budcalculator.com/pages/extraction-cost",
+    url: "https://budcalculator.com/calculators/extraction-cost",
     images: [
       {
-        url: "/assets/preview.png",
+        url: "https://budcalculator.com/assets/preview.png",
         width: 1200,
         height: 630,
         alt: "BUD Calculator – Cannabis Tools",
       },
     ],
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Extraction Cost Calculator | BUD Calculator",
     description: "Calculate costs and efficiency of extraction processes. Compare CO2, ethanol, hydrocarbon, and other extraction methods to determine the most cost-effective approach.",
-    images: ["/assets/preview.png"],
+    images: ["https://budcalculator.com/assets/preview.png"],
   },
   alternates: {
-    canonical: "https://budcalculator.com/pages/extraction-cost",
+    canonical: "https://budcalculator.com/calculators/extraction-cost",
   },
 };
 

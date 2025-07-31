@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     url: "https://budcalculator.com/pages/production-goal-planner",
     images: [
       {
-        url: "/assets/preview.png",
+        url: "https://budcalculator.com/assets/preview.png",
         width: 1200,
         height: 630,
         alt: "BUD Calculator – Cannabis Tools",
@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Production Goal Calculator | BUD Calculator",
     description: "Plan production targets and resource requirements. Set realistic production goals, calculate resource needs, and optimize your cannabis cultivation and manufacturing operations for maximum efficiency.",
-    images: ["/assets/preview.png"],
+    images: ["https://budcalculator.com/assets/preview.png"],
   },
   alternates: {
-    canonical: "https://budcalculator.com/pages/production-goal-planner",
+    canonical: "https://budcalculator.com/calculators/production-goal-planner",
   },
 };
 

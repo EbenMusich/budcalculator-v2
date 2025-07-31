@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Head from "next/head";
 import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -127,232 +128,257 @@ export default function ExtractionCostCalculator() {
   const inputClasses = "w-full rounded-md bg-background text-foreground px-3 py-2 text-sm ring-1 ring-border/30 focus:ring-2 focus:ring-primary placeholder:text-muted-foreground";
 
   return (
-    <Layout>
-      <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Card className="border border-border bg-secondary rounded-2xl shadow">
-          <CardContent className="p-6 lg:p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <FlaskConical className="w-6 h-6 text-primary" />
-              <h1 className="text-3xl font-bold">Extraction Cost Calculator</h1>
-            </div>
-            <p className="text-muted-foreground mb-8">
-              This calculator helps estimate the cost of extracting concentrates from cannabis flower or trim. 
-              Enter material, solvent, labor, and yield data to get per-gram, per-kg, and yield efficiency metrics.
-            </p>
-
-            <form onSubmit={calculateResults} className="space-y-8">
-              <div className="grid grid-cols-12 gap-4 md:gap-6">
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Input Weight (g)
-                  </label>
-                  <input
-                    type="number"
-                    name="inputWeight"
-                    value={inputs.inputWeight}
-                    onChange={handleInputChange}
-                    placeholder="Enter input weight"
-                    className={inputClasses}
-                    required
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Material Cost per Pound ($)
-                  </label>
-                  <input
-                    type="number"
-                    name="materialCostPerLb"
-                    value={inputs.materialCostPerLb}
-                    onChange={handleInputChange}
-                    placeholder="Enter material cost per lb"
-                    className={inputClasses}
-                    required
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Solvent Used (lbs)
-                  </label>
-                  <input
-                    type="number"
-                    name="solventUsed"
-                    value={inputs.solventUsed}
-                    onChange={handleInputChange}
-                    placeholder="Enter solvent amount"
-                    className={inputClasses}
-                    required
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Solvent Cost Per lb ($)
-                  </label>
-                  <input
-                    type="number"
-                    name="solventCostPerLb"
-                    value={inputs.solventCostPerLb}
-                    onChange={handleInputChange}
-                    placeholder="Enter solvent cost per lb"
-                    className={inputClasses}
-                    required
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Filter Media / Consumables ($)
-                  </label>
-                  <input
-                    type="number"
-                    name="mediaCost"
-                    value={inputs.mediaCost}
-                    onChange={handleInputChange}
-                    placeholder="Enter consumables cost"
-                    className={inputClasses}
-                    required
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Processing Time (minutes)
-                  </label>
-                  <input
-                    type="number"
-                    name="minutes"
-                    value={inputs.minutes}
-                    onChange={handleInputChange}
-                    placeholder="Enter processing time"
-                    className={inputClasses}
-                    required
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Labor Rate ($/hour)
-                  </label>
-                  <input
-                    type="number"
-                    name="laborRate"
-                    value={inputs.laborRate}
-                    onChange={handleInputChange}
-                    placeholder="Enter labor rate"
-                    className={inputClasses}
-                    required
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Equipment / Testing Cost ($)
-                  </label>
-                  <input
-                    type="number"
-                    name="equipmentCost"
-                    value={inputs.equipmentCost}
-                    onChange={handleInputChange}
-                    placeholder="Enter equipment cost (optional)"
-                    className={inputClasses}
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Yield Type 1 (g)
-                  </label>
-                  <input
-                    type="number"
-                    name="yield1"
-                    value={inputs.yield1}
-                    onChange={handleInputChange}
-                    placeholder="Enter primary yield"
-                    className={inputClasses}
-                    required
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Yield Type 2 (g)
-                  </label>
-                  <input
-                    type="number"
-                    name="yield2"
-                    value={inputs.yield2}
-                    onChange={handleInputChange}
-                    placeholder="Enter secondary yield"
-                    className={inputClasses}
-                    required
-                  />
-                </div>
+    <>
+      <Head>
+        <link rel="canonical" href="https://budcalculator.com/calculators/extraction-cost" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Extraction Cost Calculator",
+            "url": "https://budcalculator.com/calculators/extraction-cost",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "description": "Calculate production costs for cannabis extracts including material input, labor, and hydrocarbon use. Useful for hash labs.",
+            "creator": {
+              "@type": "Organization",
+              "name": "BUD Calculator"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "0.00",
+              "priceCurrency": "USD"
+            }
+          })
+        }} />
+      </Head>
+      <Layout>
+        <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <Card className="border border-border bg-secondary rounded-2xl shadow">
+            <CardContent className="p-6 lg:p-8">
+              <div className="flex items-center gap-3 mb-4">
+                <FlaskConical className="w-6 h-6 text-primary" />
+                <h1 className="text-3xl font-bold">Extraction Cost Calculator</h1>
               </div>
+              <p className="text-muted-foreground mb-8">
+                This calculator helps estimate the cost of extracting concentrates from cannabis flower or trim. 
+                Enter material, solvent, labor, and yield data to get per-gram, per-kg, and yield efficiency metrics.
+              </p>
 
-              <Button type="submit" className="w-full sm:w-auto">
-                Calculate
-              </Button>
-
-              {results ? (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                >
-                  <div className="bg-muted rounded-lg p-4">
-                    <p className="text-sm text-muted-foreground mb-1">Total Cost of Run</p>
-                    <p className="text-2xl font-bold text-primary">
-                      ${results.totalCost.toFixed(2)}
-                    </p>
+              <form onSubmit={calculateResults} className="space-y-8">
+                <div className="grid grid-cols-12 gap-4 md:gap-6">
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Input Weight (g)
+                    </label>
+                    <input
+                      type="number"
+                      name="inputWeight"
+                      value={inputs.inputWeight}
+                      onChange={handleInputChange}
+                      placeholder="Enter input weight"
+                      className={inputClasses}
+                      required
+                    />
                   </div>
 
-                  <div className="bg-muted rounded-lg p-4">
-                    <p className="text-sm text-muted-foreground mb-1">Cost Per Gram</p>
-                    <p className="text-2xl font-bold text-primary">
-                      ${results.costPerGram.toFixed(2)}
-                    </p>
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Material Cost per Pound ($)
+                    </label>
+                    <input
+                      type="number"
+                      name="materialCostPerLb"
+                      value={inputs.materialCostPerLb}
+                      onChange={handleInputChange}
+                      placeholder="Enter material cost per lb"
+                      className={inputClasses}
+                      required
+                    />
                   </div>
 
-                  <div className="bg-muted rounded-lg p-4">
-                    <p className="text-sm text-muted-foreground mb-1">Yield Percentage</p>
-                    <p className="text-2xl font-bold text-primary">
-                      {results.yieldPercent.toFixed(2)}%
-                    </p>
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Solvent Used (lbs)
+                    </label>
+                    <input
+                      type="number"
+                      name="solventUsed"
+                      value={inputs.solventUsed}
+                      onChange={handleInputChange}
+                      placeholder="Enter solvent amount"
+                      className={inputClasses}
+                      required
+                    />
                   </div>
 
-                  <div className="bg-muted rounded-lg p-4">
-                    <p className="text-sm text-muted-foreground mb-1">Cost Per Kilogram</p>
-                    <p className="text-2xl font-bold text-primary">
-                      ${results.costPerKg.toFixed(2)}
-                    </p>
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Solvent Cost Per lb ($)
+                    </label>
+                    <input
+                      type="number"
+                      name="solventCostPerLb"
+                      value={inputs.solventCostPerLb}
+                      onChange={handleInputChange}
+                      placeholder="Enter solvent cost per lb"
+                      className={inputClasses}
+                      required
+                    />
                   </div>
 
-                  <div className="bg-muted rounded-lg p-4">
-                    <p className="text-sm text-muted-foreground mb-1">Cost Per Liter (est)</p>
-                    <p className="text-2xl font-bold text-primary">
-                      ${results.costPerLiter.toFixed(2)}
-                    </p>
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Filter Media / Consumables ($)
+                    </label>
+                    <input
+                      type="number"
+                      name="mediaCost"
+                      value={inputs.mediaCost}
+                      onChange={handleInputChange}
+                      placeholder="Enter consumables cost"
+                      className={inputClasses}
+                      required
+                    />
                   </div>
-                </motion.div>
-              ) : null}
-            </form>
 
-            <div className="mt-8">
-              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
-              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>Track solvent input by batch (butane/propane per run) to calculate actual usage</li>
-                <li>Account for loss and evaporation when measuring final output weight</li>
-                <li>Separate labor by extraction type (CRC vs. live resin) for accurate cost allocation</li>
-                <li>Use accurate weights per sock or material unit for consistent measurements</li>
-                <li>Include filter media or post-processing costs if applicable to your process</li>
-              </ul>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </Layout>
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Processing Time (minutes)
+                    </label>
+                    <input
+                      type="number"
+                      name="minutes"
+                      value={inputs.minutes}
+                      onChange={handleInputChange}
+                      placeholder="Enter processing time"
+                      className={inputClasses}
+                      required
+                    />
+                  </div>
+
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Labor Rate ($/hour)
+                    </label>
+                    <input
+                      type="number"
+                      name="laborRate"
+                      value={inputs.laborRate}
+                      onChange={handleInputChange}
+                      placeholder="Enter labor rate"
+                      className={inputClasses}
+                      required
+                    />
+                  </div>
+
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Equipment / Testing Cost ($)
+                    </label>
+                    <input
+                      type="number"
+                      name="equipmentCost"
+                      value={inputs.equipmentCost}
+                      onChange={handleInputChange}
+                      placeholder="Enter equipment cost (optional)"
+                      className={inputClasses}
+                    />
+                  </div>
+
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Yield Type 1 (g)
+                    </label>
+                    <input
+                      type="number"
+                      name="yield1"
+                      value={inputs.yield1}
+                      onChange={handleInputChange}
+                      placeholder="Enter primary yield"
+                      className={inputClasses}
+                      required
+                    />
+                  </div>
+
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Yield Type 2 (g)
+                    </label>
+                    <input
+                      type="number"
+                      name="yield2"
+                      value={inputs.yield2}
+                      onChange={handleInputChange}
+                      placeholder="Enter secondary yield"
+                      className={inputClasses}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <Button type="submit" className="w-full sm:w-auto">
+                  Calculate
+                </Button>
+
+                {results ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                  >
+                    <div className="bg-muted rounded-lg p-4">
+                      <p className="text-sm text-muted-foreground mb-1">Total Cost of Run</p>
+                      <p className="text-2xl font-bold text-primary">
+                        ${results.totalCost.toFixed(2)}
+                      </p>
+                    </div>
+
+                    <div className="bg-muted rounded-lg p-4">
+                      <p className="text-sm text-muted-foreground mb-1">Cost Per Gram</p>
+                      <p className="text-2xl font-bold text-primary">
+                        ${results.costPerGram.toFixed(2)}
+                      </p>
+                    </div>
+
+                    <div className="bg-muted rounded-lg p-4">
+                      <p className="text-sm text-muted-foreground mb-1">Yield Percentage</p>
+                      <p className="text-2xl font-bold text-primary">
+                        {results.yieldPercent.toFixed(2)}%
+                      </p>
+                    </div>
+
+                    <div className="bg-muted rounded-lg p-4">
+                      <p className="text-sm text-muted-foreground mb-1">Cost Per Kilogram</p>
+                      <p className="text-2xl font-bold text-primary">
+                        ${results.costPerKg.toFixed(2)}
+                      </p>
+                    </div>
+
+                    <div className="bg-muted rounded-lg p-4">
+                      <p className="text-sm text-muted-foreground mb-1">Cost Per Liter (est)</p>
+                      <p className="text-2xl font-bold text-primary">
+                        ${results.costPerLiter.toFixed(2)}
+                      </p>
+                    </div>
+                  </motion.div>
+                ) : null}
+              </form>
+
+              <div className="mt-8">
+                <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                  <li>Track solvent input by batch (butane/propane per run) to calculate actual usage</li>
+                  <li>Account for loss and evaporation when measuring final output weight</li>
+                  <li>Separate labor by extraction type (CRC vs. live resin) for accurate cost allocation</li>
+                  <li>Use accurate weights per sock or material unit for consistent measurements</li>
+                  <li>Include filter media or post-processing costs if applicable to your process</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </Layout>
+    </>
   );
 }

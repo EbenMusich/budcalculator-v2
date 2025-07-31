@@ -6,8 +6,29 @@ import Script from 'next/script';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'BUD Calculator - Cannabis Business Tools',
-  description: 'Professional cannabis business calculators for cultivation, extraction, edibles, and business operations. Calculate costs, forecast yields, and optimize production.',
+  title: 'BUD Calculator – Cannabis Business Tools for Cultivators, Manufacturers, and Retailers',
+  description: 'Free calculators for cannabis operators to improve margins, price strategy, cost tracking, and production planning. Built for growers, labs, and dispensaries.',
+  keywords: 'cannabis calculator, marijuana business tools, cannabis cost calculator, cannabis profit calculator, cannabis business software',
+  openGraph: {
+    title: 'BUD Calculator – Cannabis Business Tools for Cultivators, Manufacturers, and Retailers',
+    description: 'Free calculators for cannabis operators to improve margins, price strategy, cost tracking, and production planning. Built for growers, labs, and dispensaries.',
+    url: 'https://budcalculator.com',
+    images: [
+      {
+        url: 'https://budcalculator.com/assets/preview.png',
+        width: 1200,
+        height: 630,
+        alt: 'BUD Calculator - Cannabis Business Tools',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'BUD Calculator – Cannabis Business Tools for Cultivators, Manufacturers, and Retailers',
+    description: 'Free calculators for cannabis operators to improve margins, price strategy, cost tracking, and production planning.',
+    images: ['https://budcalculator.com/assets/preview.png'],
+  },
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -17,6 +38,9 @@ export const metadata: Metadata = {
     apple: [
       { url: '/apple-touch-icon.png' },
     ],
+  },
+  alternates: {
+    canonical: 'https://budcalculator.com',
   },
 };
 

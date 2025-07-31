@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Head from "next/head";
 import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -122,217 +123,222 @@ export default function THCLossCalculator() {
   };
 
   return (
-    <Layout>
-      <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Card className="border border-border bg-secondary rounded-2xl shadow">
-          <CardContent className="p-6 lg:p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <ThermometerSun className="w-6 h-6 text-primary" />
-              <h1 className="text-3xl font-bold">THC Loss Calculator</h1>
-            </div>
-            <p className="text-muted-foreground mb-8">
-              This calculator estimates how much THC is lost during the process of making edibles when using{" "}
-              <span className="italic font-medium">flower as the starting material</span>. It accounts for 
-              decarboxylation, infusion, and cooking losses to help you calculate final potency and yield.
-            </p>
-
-            <form onSubmit={calculateResults} className="space-y-8">
-              <div className="grid grid-cols-12 gap-4 md:gap-6">
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Starting Material Weight (g)
-                  </label>
-                  <input
-                    type="number"
-                    name="weight"
-                    value={inputs.weight}
-                    onChange={handleInputChange}
-                    placeholder="Enter weight in grams"
-                    step="0.01"
-                    required
-                    className={inputClasses}
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    THC Percentage of Flower (%)
-                  </label>
-                  <input
-                    type="number"
-                    name="thcPercent"
-                    value={inputs.thcPercent}
-                    onChange={handleInputChange}
-                    placeholder="Enter THC percentage"
-                    step="0.01"
-                    min="0"
-                    max="100"
-                    required
-                    className={inputClasses}
-                  />
-                </div>
-
-                <div className="col-span-12">
-                  <label className="block text-sm font-medium mb-4">
-                    Decarb Loss ({inputs.decarbLoss[0]}%)
-                  </label>
-                  <div className="px-3">
-                    <Slider
-                      value={inputs.decarbLoss}
-                      onValueChange={handleSliderChange}
-                      max={50}
-                      min={0}
-                      step={1}
-                      className="w-full [&>span:first-child]:h-2 [&>span:first-child]:bg-muted-foreground/30 [&_[data-orientation=horizontal]]:bg-green-500 [&_[role=slider]]:h-4 [&_[role=slider]]:w-4 [&_[role=slider]]:bg-green-500 [&_[role=slider]]:border-2 [&_[role=slider]]:border-white [&_[role=slider]]:shadow-md"
-                    />
-                    <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                      <span>0%</span>
-                      <span>25%</span>
-                      <span>50%</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Infusion Loss (%)
-                  </label>
-                  <input
-                    type="number"
-                    name="infusionLoss"
-                    value={inputs.infusionLoss}
-                    onChange={handleInputChange}
-                    placeholder="Enter infusion loss percentage"
-                    step="0.01"
-                    min="0"
-                    max="100"
-                    required
-                    className={inputClasses}
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Cooking/Baking Loss (%)
-                  </label>
-                  <input
-                    type="number"
-                    name="bakingLoss"
-                    value={inputs.bakingLoss}
-                    onChange={handleInputChange}
-                    placeholder="Enter baking loss percentage"
-                    step="0.01"
-                    min="0"
-                    max="100"
-                    required
-                    className={inputClasses}
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Number of Final Pieces
-                  </label>
-                  <input
-                    type="number"
-                    name="numPieces"
-                    value={inputs.numPieces}
-                    onChange={handleInputChange}
-                    placeholder="Enter number of pieces"
-                    step="1"
-                    min="1"
-                    required
-                    className={inputClasses}
-                  />
-                </div>
+    <>
+      <Head>
+        <link rel="canonical" href="https://budcalculator.com/calculators/thc-loss" />
+      </Head>
+      <Layout>
+        <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <Card className="border border-border bg-secondary rounded-2xl shadow">
+            <CardContent className="p-6 lg:p-8">
+              <div className="flex items-center gap-3 mb-4">
+                <ThermometerSun className="w-6 h-6 text-primary" />
+                <h1 className="text-3xl font-bold">THC Loss Calculator</h1>
               </div>
+              <p className="text-muted-foreground mb-8">
+                This calculator estimates how much THC is lost during the process of making edibles when using{" "}
+                <span className="italic font-medium">flower as the starting material</span>. It accounts for 
+                decarboxylation, infusion, and cooking losses to help you calculate final potency and yield.
+              </p>
 
-              <Button 
-                type="submit" 
-                className="w-full sm:w-auto"
-                disabled={!isFormValid()}
-              >
-                Calculate
-              </Button>
+              <form onSubmit={calculateResults} className="space-y-8">
+                <div className="grid grid-cols-12 gap-4 md:gap-6">
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Starting Material Weight (g)
+                    </label>
+                    <input
+                      type="number"
+                      name="weight"
+                      value={inputs.weight}
+                      onChange={handleInputChange}
+                      placeholder="Enter weight in grams"
+                      step="0.01"
+                      required
+                      className={inputClasses}
+                    />
+                  </div>
 
-              {results ? (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="space-y-4"
-                >
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">Total Starting THC</p>
-                      <p className="text-2xl font-bold text-primary">
-                        {results.startingTHC.toFixed(2)} mg
-                      </p>
-                    </div>
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      THC Percentage of Flower (%)
+                    </label>
+                    <input
+                      type="number"
+                      name="thcPercent"
+                      value={inputs.thcPercent}
+                      onChange={handleInputChange}
+                      placeholder="Enter THC percentage"
+                      step="0.01"
+                      min="0"
+                      max="100"
+                      required
+                      className={inputClasses}
+                    />
+                  </div>
 
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">THC After Decarb</p>
-                      <p className="text-2xl font-bold text-primary">
-                        {results.thcAfterDecarb.toFixed(2)} mg
-                      </p>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">THC After Infusion</p>
-                      <p className="text-2xl font-bold text-primary">
-                        {results.thcAfterInfusion.toFixed(2)} mg
-                      </p>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">Final THC in Batch</p>
-                      <p className="text-2xl font-bold text-primary">
-                        {results.finalTHCInBatch.toFixed(2)} mg
-                      </p>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">THC Per Piece</p>
-                      <p className="text-2xl font-bold text-primary">
-                        {results.thcPerPiece.toFixed(2)} mg
-                      </p>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">Total THC Loss</p>
-                      <p className={`text-2xl font-bold ${
-                        results.totalLoss > 50 ? 'text-destructive' : 'text-primary'
-                      }`}>
-                        {results.totalLoss.toFixed(2)}%
-                      </p>
+                  <div className="col-span-12">
+                    <label className="block text-sm font-medium mb-4">
+                      Decarb Loss ({inputs.decarbLoss[0]}%)
+                    </label>
+                    <div className="px-3">
+                      <Slider
+                        value={inputs.decarbLoss}
+                        onValueChange={handleSliderChange}
+                        max={50}
+                        min={0}
+                        step={1}
+                        className="w-full [&>span:first-child]:h-2 [&>span:first-child]:bg-muted-foreground/30 [&_[data-orientation=horizontal]]:bg-green-500 [&_[role=slider]]:h-4 [&_[role=slider]]:w-4 [&_[role=slider]]:bg-green-500 [&_[role=slider]]:border-2 [&_[role=slider]]:border-white [&_[role=slider]]:shadow-md"
+                      />
+                      <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                        <span>0%</span>
+                        <span>25%</span>
+                        <span>50%</span>
+                      </div>
                     </div>
                   </div>
 
-                  {results.totalLoss > 60 ? (
-                    <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
-                      <p className="text-destructive font-medium">High THC Loss Detected</p>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Your total THC loss is quite high. Consider optimizing your decarboxylation, 
-                        infusion, or baking processes to retain more potency.
-                      </p>
-                    </div>
-                  ) : null}
-                </motion.div>
-              ) : null}
-            </form>
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Infusion Loss (%)
+                    </label>
+                    <input
+                      type="number"
+                      name="infusionLoss"
+                      value={inputs.infusionLoss}
+                      onChange={handleInputChange}
+                      placeholder="Enter infusion loss percentage"
+                      step="0.01"
+                      min="0"
+                      max="100"
+                      required
+                      className={inputClasses}
+                    />
+                  </div>
 
-            <div className="mt-8">
-              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
-              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>Use realistic decarb efficiency based on your oven setup and material type</li>
-                <li>Account for THC degradation from prolonged high heat (especially above 240°F)</li>
-                <li>Baking can cause additional cannabinoid loss — track time and temperature carefully</li>
-                <li>Use potency testing or prior batch results to calibrate your assumptions</li>
-                <li>Record strain-specific or process-specific loss rates for future improvement</li>
-              </ul>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </Layout>
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Cooking/Baking Loss (%)
+                    </label>
+                    <input
+                      type="number"
+                      name="bakingLoss"
+                      value={inputs.bakingLoss}
+                      onChange={handleInputChange}
+                      placeholder="Enter baking loss percentage"
+                      step="0.01"
+                      min="0"
+                      max="100"
+                      required
+                      className={inputClasses}
+                    />
+                  </div>
+
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Number of Final Pieces
+                    </label>
+                    <input
+                      type="number"
+                      name="numPieces"
+                      value={inputs.numPieces}
+                      onChange={handleInputChange}
+                      placeholder="Enter number of pieces"
+                      step="1"
+                      min="1"
+                      required
+                      className={inputClasses}
+                    />
+                  </div>
+                </div>
+
+                <Button 
+                  type="submit" 
+                  className="w-full sm:w-auto"
+                  disabled={!isFormValid()}
+                >
+                  Calculate
+                </Button>
+
+                {results ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-4"
+                  >
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      <div className="bg-muted rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">Total Starting THC</p>
+                        <p className="text-2xl font-bold text-primary">
+                          {results.startingTHC.toFixed(2)} mg
+                        </p>
+                      </div>
+
+                      <div className="bg-muted rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">THC After Decarb</p>
+                        <p className="text-2xl font-bold text-primary">
+                          {results.thcAfterDecarb.toFixed(2)} mg
+                        </p>
+                      </div>
+
+                      <div className="bg-muted rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">THC After Infusion</p>
+                        <p className="text-2xl font-bold text-primary">
+                          {results.thcAfterInfusion.toFixed(2)} mg
+                        </p>
+                      </div>
+
+                      <div className="bg-muted rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">Final THC in Batch</p>
+                        <p className="text-2xl font-bold text-primary">
+                          {results.finalTHCInBatch.toFixed(2)} mg
+                        </p>
+                      </div>
+
+                      <div className="bg-muted rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">THC Per Piece</p>
+                        <p className="text-2xl font-bold text-primary">
+                          {results.thcPerPiece.toFixed(2)} mg
+                        </p>
+                      </div>
+
+                      <div className="bg-muted rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">Total THC Loss</p>
+                        <p className={`text-2xl font-bold ${
+                          results.totalLoss > 50 ? 'text-destructive' : 'text-primary'
+                        }`}>
+                          {results.totalLoss.toFixed(2)}%
+                        </p>
+                      </div>
+                    </div>
+
+                    {results.totalLoss > 60 ? (
+                      <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
+                        <p className="text-destructive font-medium">High THC Loss Detected</p>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Your total THC loss is quite high. Consider optimizing your decarboxylation, 
+                          infusion, or baking processes to retain more potency.
+                        </p>
+                      </div>
+                    ) : null}
+                  </motion.div>
+                ) : null}
+              </form>
+
+              <div className="mt-8">
+                <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                  <li>Use realistic decarb efficiency based on your oven setup and material type</li>
+                  <li>Account for THC degradation from prolonged high heat (especially above 240°F)</li>
+                  <li>Baking can cause additional cannabinoid loss — track time and temperature carefully</li>
+                  <li>Use potency testing or prior batch results to calibrate your assumptions</li>
+                  <li>Record strain-specific or process-specific loss rates for future improvement</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </Layout>
+    </>
   );
 }

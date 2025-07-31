@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Head from "next/head";
 import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -104,225 +105,250 @@ export default function EdiblesUnitCostCalculator() {
   const inputClasses = "w-full rounded-md bg-background text-foreground px-3 py-2 text-sm ring-1 ring-border/30 focus:ring-2 focus:ring-primary placeholder:text-muted-foreground";
 
   return (
-    <Layout>
-      <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Card className="border border-border bg-secondary rounded-2xl shadow">
-          <CardContent className="p-6 lg:p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <SquareStack className="w-6 h-6 text-primary" />
-              <h1 className="text-3xl font-bold">Edibles Cost Per Unit Calculator</h1>
-            </div>
-            <p className="text-muted-foreground mb-8">
-              Use this calculator to estimate the cost per unit of your infused edibles. Input all relevant costs (cannabis, ingredients, labor, packaging, and testing), and the calculator will give you per-unit cost, THC per piece, and cost per milligram of THC.
-            </p>
-
-            <form onSubmit={calculateResults} className="space-y-8">
-              <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Total THC (mg)
-                  </label>
-                  <input
-                    type="number"
-                    name="totalTHC"
-                    value={inputs.totalTHC}
-                    onChange={handleInputChange}
-                    placeholder="Enter total THC content"
-                    step="any"
-                    required
-                    className={inputClasses}
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Number of Edible Units
-                  </label>
-                  <input
-                    type="number"
-                    name="numUnits"
-                    value={inputs.numUnits}
-                    onChange={handleInputChange}
-                    placeholder="Enter number of pieces"
-                    step="any"
-                    required
-                    className={inputClasses}
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Ingredient Cost ($)
-                  </label>
-                  <input
-                    type="number"
-                    name="ingredientCost"
-                    value={inputs.ingredientCost}
-                    onChange={handleInputChange}
-                    placeholder="Enter ingredient cost"
-                    step="any"
-                    required
-                    className={inputClasses}
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Packaging Cost ($)
-                  </label>
-                  <input
-                    type="number"
-                    name="packagingCost"
-                    value={inputs.packagingCost}
-                    onChange={handleInputChange}
-                    placeholder="Enter packaging cost"
-                    step="any"
-                    required
-                    className={inputClasses}
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Labor Time (minutes)
-                  </label>
-                  <input
-                    type="number"
-                    name="laborTime"
-                    value={inputs.laborTime}
-                    onChange={handleInputChange}
-                    placeholder="Enter labor time"
-                    step="any"
-                    required
-                    className={inputClasses}
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Labor Rate ($/hour)
-                  </label>
-                  <input
-                    type="number"
-                    name="laborRate"
-                    value={inputs.laborRate}
-                    onChange={handleInputChange}
-                    placeholder="Enter hourly rate"
-                    step="any"
-                    required
-                    className={inputClasses}
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Testing Cost ($)
-                  </label>
-                  <input
-                    type="number"
-                    name="testingCost"
-                    value={inputs.testingCost}
-                    onChange={handleInputChange}
-                    placeholder="Enter testing cost"
-                    step="any"
-                    required
-                    className={inputClasses}
-                  />
-                </div>
-
-                <div className="col-span-12 sm:col-span-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Other Costs ($) (optional)
-                  </label>
-                  <input
-                    type="number"
-                    name="otherCost"
-                    value={inputs.otherCost}
-                    onChange={handleInputChange}
-                    placeholder="Enter other costs"
-                    step="any"
-                    className={inputClasses}
-                  />
-                </div>
+    <>
+      <Head>
+        <link rel="canonical" href="https://budcalculator.com/calculators/edibles-unit-cost" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Edibles Unit Cost Calculator",
+            "url": "https://budcalculator.com/calculators/edibles-unit-cost",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "description": "Calculate cost per unit for cannabis-infused edibles like gummies. Enter batch size, ingredient costs, labor, packaging, and dose to determine unit economics and margins.",
+            "creator": {
+              "@type": "Organization",
+              "name": "BUD Calculator"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "0.00",
+              "priceCurrency": "USD"
+            }
+          })
+        }} />
+      </Head>
+      <Layout>
+        <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <Card className="border border-border bg-secondary rounded-2xl shadow">
+            <CardContent className="p-6 lg:p-8">
+              <div className="flex items-center gap-3 mb-4">
+                <SquareStack className="w-6 h-6 text-primary" />
+                <h1 className="text-3xl font-bold">Edibles Cost Per Unit Calculator</h1>
               </div>
+              <p className="text-muted-foreground mb-8">
+                Use this calculator to estimate the cost per unit of your infused edibles. Input all relevant costs (cannabis, ingredients, labor, packaging, and testing), and the calculator will give you per-unit cost, THC per piece, and cost per milligram of THC.
+              </p>
 
-              <Button type="submit" className="w-full sm:w-auto mt-4">
-                Calculate
-              </Button>
-
-              {results ? (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="space-y-4"
-                >
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">Total Cost</p>
-                      <p className="text-2xl font-bold text-primary">
-                        ${results.totalCost.toFixed(2)}
-                      </p>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">Cost Per Piece</p>
-                      <p className="text-2xl font-bold text-primary">
-                        ${results.costPerUnit.toFixed(2)}
-                      </p>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">THC Per Piece</p>
-                      <p className="text-2xl font-bold text-primary">
-                        {results.thcPerUnit.toFixed(2)} mg
-                      </p>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">Cost Per mg THC</p>
-                      <p className="text-2xl font-bold text-primary">
-                        ${results.costPerMgTHC.toFixed(4)}
-                      </p>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">Labor Cost Per Unit</p>
-                      <p className="text-2xl font-bold text-primary">
-                        ${results.laborCostPerUnit.toFixed(2)}
-                      </p>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">Packaging Cost Per Unit</p>
-                      <p className="text-2xl font-bold text-primary">
-                        ${results.packagingPerUnit.toFixed(2)}
-                      </p>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-4">
-                      <p className="text-sm text-muted-foreground mb-1">Ingredient Cost Per Unit</p>
-                      <p className="text-2xl font-bold text-primary">
-                        ${results.ingredientPerUnit.toFixed(2)}
-                      </p>
-                    </div>
+              <form onSubmit={calculateResults} className="space-y-8">
+                <div className="grid grid-cols-12 gap-4">
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Total THC (mg)
+                    </label>
+                    <input
+                      type="number"
+                      name="totalTHC"
+                      value={inputs.totalTHC}
+                      onChange={handleInputChange}
+                      placeholder="Enter total THC content"
+                      step="any"
+                      required
+                      className={inputClasses}
+                    />
                   </div>
-                </motion.div>
-              ) : null}
-            </form>
 
-            <div className="mt-8">
-              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
-              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>Make sure batch size and total units are based on the final, trimmed, and portioned product count</li>
-                <li>Use current ingredient prices (including active cannabinoids) — not outdated estimates</li>
-                <li>Don't forget to include packaging, testing, and labor time for each batch</li>
-                <li>Track labor as total minutes and convert to an hourly wage for consistency</li>
-                <li>For best results, average cost data across multiple production runs</li>
-              </ul>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </Layout>
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Number of Edible Units
+                    </label>
+                    <input
+                      type="number"
+                      name="numUnits"
+                      value={inputs.numUnits}
+                      onChange={handleInputChange}
+                      placeholder="Enter number of pieces"
+                      step="any"
+                      required
+                      className={inputClasses}
+                    />
+                  </div>
+
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Ingredient Cost ($)
+                    </label>
+                    <input
+                      type="number"
+                      name="ingredientCost"
+                      value={inputs.ingredientCost}
+                      onChange={handleInputChange}
+                      placeholder="Enter ingredient cost"
+                      step="any"
+                      required
+                      className={inputClasses}
+                    />
+                  </div>
+
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Packaging Cost ($)
+                    </label>
+                    <input
+                      type="number"
+                      name="packagingCost"
+                      value={inputs.packagingCost}
+                      onChange={handleInputChange}
+                      placeholder="Enter packaging cost"
+                      step="any"
+                      required
+                      className={inputClasses}
+                    />
+                  </div>
+
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Labor Time (minutes)
+                    </label>
+                    <input
+                      type="number"
+                      name="laborTime"
+                      value={inputs.laborTime}
+                      onChange={handleInputChange}
+                      placeholder="Enter labor time"
+                      step="any"
+                      required
+                      className={inputClasses}
+                    />
+                  </div>
+
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Labor Rate ($/hour)
+                    </label>
+                    <input
+                      type="number"
+                      name="laborRate"
+                      value={inputs.laborRate}
+                      onChange={handleInputChange}
+                      placeholder="Enter hourly rate"
+                      step="any"
+                      required
+                      className={inputClasses}
+                    />
+                  </div>
+
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Testing Cost ($)
+                    </label>
+                    <input
+                      type="number"
+                      name="testingCost"
+                      value={inputs.testingCost}
+                      onChange={handleInputChange}
+                      placeholder="Enter testing cost"
+                      step="any"
+                      required
+                      className={inputClasses}
+                    />
+                  </div>
+
+                  <div className="col-span-12 sm:col-span-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Other Costs ($) (optional)
+                    </label>
+                    <input
+                      type="number"
+                      name="otherCost"
+                      value={inputs.otherCost}
+                      onChange={handleInputChange}
+                      placeholder="Enter other costs"
+                      step="any"
+                      className={inputClasses}
+                    />
+                  </div>
+                </div>
+
+                <Button type="submit" className="w-full sm:w-auto mt-4">
+                  Calculate
+                </Button>
+
+                {results ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-4"
+                  >
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      <div className="bg-muted rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">Total Cost</p>
+                        <p className="text-2xl font-bold text-primary">
+                          ${results.totalCost.toFixed(2)}
+                        </p>
+                      </div>
+
+                      <div className="bg-muted rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">Cost Per Piece</p>
+                        <p className="text-2xl font-bold text-primary">
+                          ${results.costPerUnit.toFixed(2)}
+                        </p>
+                      </div>
+
+                      <div className="bg-muted rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">THC Per Piece</p>
+                        <p className="text-2xl font-bold text-primary">
+                          {results.thcPerUnit.toFixed(2)} mg
+                        </p>
+                      </div>
+
+                      <div className="bg-muted rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">Cost Per mg THC</p>
+                        <p className="text-2xl font-bold text-primary">
+                          ${results.costPerMgTHC.toFixed(4)}
+                        </p>
+                      </div>
+
+                      <div className="bg-muted rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">Labor Cost Per Unit</p>
+                        <p className="text-2xl font-bold text-primary">
+                          ${results.laborCostPerUnit.toFixed(2)}
+                        </p>
+                      </div>
+
+                      <div className="bg-muted rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">Packaging Cost Per Unit</p>
+                        <p className="text-2xl font-bold text-primary">
+                          ${results.packagingPerUnit.toFixed(2)}
+                        </p>
+                      </div>
+
+                      <div className="bg-muted rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">Ingredient Cost Per Unit</p>
+                        <p className="text-2xl font-bold text-primary">
+                          ${results.ingredientPerUnit.toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ) : null}
+              </form>
+
+              <div className="mt-8">
+                <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                  <li>Make sure batch size and total units are based on the final, trimmed, and portioned product count</li>
+                  <li>Use current ingredient prices (including active cannabinoids) — not outdated estimates</li>
+                  <li>Don't forget to include packaging, testing, and labor time for each batch</li>
+                  <li>Track labor as total minutes and convert to an hourly wage for consistency</li>
+                  <li>For best results, average cost data across multiple production runs</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </Layout>
+    </>
   );
 }

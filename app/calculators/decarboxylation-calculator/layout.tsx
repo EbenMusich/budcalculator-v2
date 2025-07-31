@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     url: "https://budcalculator.com/pages/decarboxylation-calculator",
     images: [
       {
-        url: "/assets/preview.png",
+        url: "https://budcalculator.com/assets/preview.png",
         width: 1200,
         height: 630,
         alt: "BUD Calculator – Cannabis Tools",
@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Decarboxylation Calculator | BUD Calculator",
     description: "Calculate optimal time and temperature for decarboxylation. Convert THCA to THC and CBDA to CBD with precise temperature and duration settings for maximum potency.",
-    images: ["/assets/preview.png"],
+    images: ["https://budcalculator.com/assets/preview.png"],
   },
   alternates: {
-    canonical: "https://budcalculator.com/pages/decarboxylation-calculator",
+    canonical: "https://budcalculator.com/calculators/decarboxylation-calculator",
   },
 };
 

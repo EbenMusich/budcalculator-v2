@@ -11,20 +11,29 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Cookies from "js-cookie";
 
 export default function AgeGatePage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (Cookies.get("ageVerified") === "true") {
+    // Check if user has already confirmed age
+    if (localStorage.getItem("is21Confirmed") === "true") {
       router.push("/");
     }
   }, [router]);
 
   const handleConfirm = () => {
-    Cookies.set("ageVerified", "true", { expires: 365 });
-    router.push("/");
+    // Set age confirmation in localStorage
+    localStorage.setItem("is21Confirmed", "true");
+    
+    // Get the stored redirect path, default to "/" if not found
+    const redirectPath = localStorage.getItem("postAgeGateRedirect") || "/";
+    
+    // Clear the stored redirect path
+    localStorage.removeItem("postAgeGateRedirect");
+    
+    // Redirect to the stored path or home page
+    window.location.href = redirectPath;
   };
 
   const handleLeave = () => {

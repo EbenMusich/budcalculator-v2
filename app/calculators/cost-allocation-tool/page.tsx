@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Head from "next/head";
 import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -244,311 +245,316 @@ export default function CostAllocationCalculator() {
   };
 
   return (
-    <Layout>
-      <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Card className="border border-border bg-secondary rounded-2xl shadow">
-          <CardContent className="p-6 lg:p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <Calculator className="w-6 h-6 text-primary" />
-              <h1 className="text-3xl font-bold">Cost Allocation Tool</h1>
-            </div>
-            <p className="text-muted-foreground mb-8">
-              Allocate total manufacturing costs across multiple SKUs using weight-based, time-based, or manual percentage allocation methods. 
-              Get detailed cost metrics and margin insights for each product.
-            </p>
-
-            <form onSubmit={calculateResults} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Total Cost of Manufacturing ($)
-                  </label>
-                  <input
-                    type="number"
-                    name="totalCost"
-                    value={inputs.totalCost}
-                    onChange={handleInputChange}
-                    placeholder="Enter total manufacturing cost"
-                    step="0.01"
-                    min="0"
-                    required
-                    className={inputClasses}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Allocation Method
-                  </label>
-                  <Select
-                    value={inputs.allocationMethod}
-                    onValueChange={handleMethodChange}
-                  >
-                    <SelectTrigger className="w-full bg-background">
-                      <SelectValue placeholder="Select allocation method" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="weight">Weight-Based</SelectItem>
-                      <SelectItem value="time">Time-Based</SelectItem>
-                      <SelectItem value="manual">Manual % Allocation</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+    <>
+      <Head>
+        <link rel="canonical" href="https://budcalculator.com/calculators/cost-allocation-tool" />
+      </Head>
+      <Layout>
+        <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <Card className="border border-border bg-secondary rounded-2xl shadow">
+            <CardContent className="p-6 lg:p-8">
+              <div className="flex items-center gap-3 mb-4">
+                <Calculator className="w-6 h-6 text-primary" />
+                <h1 className="text-3xl font-bold">Cost Allocation Tool</h1>
               </div>
+              <p className="text-muted-foreground mb-8">
+                Allocate total manufacturing costs across multiple SKUs using weight-based, time-based, or manual percentage allocation methods. 
+                Get detailed cost metrics and margin insights for each product.
+              </p>
 
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold">SKU Details</h3>
-                  <Button
-                    type="button"
-                    onClick={addSKU}
-                    disabled={inputs.skus.length >= 15}
-                    className="flex items-center gap-2 text-sm"
-                    variant="outline"
-                  >
-                    <Plus className="w-4 h-4" />
-                    Add SKU
-                  </Button>
+              <form onSubmit={calculateResults} className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">
+                      Total Cost of Manufacturing ($)
+                    </label>
+                    <input
+                      type="number"
+                      name="totalCost"
+                      value={inputs.totalCost}
+                      onChange={handleInputChange}
+                      placeholder="Enter total manufacturing cost"
+                      step="0.01"
+                      min="0"
+                      required
+                      className={inputClasses}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2">
+                      Allocation Method
+                    </label>
+                    <Select
+                      value={inputs.allocationMethod}
+                      onValueChange={handleMethodChange}
+                    >
+                      <SelectTrigger className="w-full bg-background">
+                        <SelectValue placeholder="Select allocation method" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="weight">Weight-Based</SelectItem>
+                        <SelectItem value="time">Time-Based</SelectItem>
+                        <SelectItem value="manual">Manual % Allocation</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
 
-                {inputs.allocationMethod === "manual" && (
-                  <div className="bg-muted/50 rounded-lg p-3">
-                    <p className="text-sm">
-                      Total Manual %: <span className={`font-bold ${
-                        Math.abs(getTotalManualPercent() - 100) < 0.01 ? 'text-green-500' : 'text-red-500'
-                      }`}>
-                        {getTotalManualPercent().toFixed(1)}%
-                      </span>
-                      {Math.abs(getTotalManualPercent() - 100) >= 0.01 && (
-                        <span className="text-red-500 ml-2">(Must equal 100%)</span>
-                      )}
-                    </p>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold">SKU Details</h3>
+                    <Button
+                      type="button"
+                      onClick={addSKU}
+                      disabled={inputs.skus.length >= 15}
+                      className="flex items-center gap-2 text-sm"
+                      variant="outline"
+                    >
+                      <Plus className="w-4 h-4" />
+                      Add SKU
+                    </Button>
                   </div>
-                )}
 
-                <div className="space-y-3">
-                  {inputs.skus.map((sku, index) => (
-                    <div key={sku.id} className="bg-muted/30 rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-medium">SKU {index + 1}</h4>
-                        {inputs.skus.length > 1 && (
-                          <Button
-                            type="button"
-                            onClick={() => removeSKU(sku.id)}
-                            variant="outline"
-                            size="sm"
-                            className="text-red-500 hover:text-red-700"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
+                  {inputs.allocationMethod === "manual" && (
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <p className="text-sm">
+                        Total Manual %: <span className={`font-bold ${
+                          Math.abs(getTotalManualPercent() - 100) < 0.01 ? 'text-green-500' : 'text-red-500'
+                        }`}>
+                          {getTotalManualPercent().toFixed(1)}%
+                        </span>
+                        {Math.abs(getTotalManualPercent() - 100) >= 0.01 && (
+                          <span className="text-red-500 ml-2">(Must equal 100%)</span>
                         )}
-                      </div>
-                      
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-                        <div>
-                          <label className="block text-xs font-medium mb-1">Product Name</label>
-                          <input
-                            type="text"
-                            value={sku.productName}
-                            onChange={(e) => handleSKUChange(sku.id, "productName", e.target.value)}
-                            placeholder="Product name"
-                            className={inputClasses}
-                          />
-                        </div>
+                      </p>
+                    </div>
+                  )}
 
-                        <div>
-                          <label className="block text-xs font-medium mb-1">Weight (g)</label>
-                          <input
-                            type="number"
-                            value={sku.weight}
-                            onChange={(e) => handleSKUChange(sku.id, "weight", e.target.value)}
-                            placeholder="Weight"
-                            step="0.01"
-                            min="0"
-                            className={inputClasses}
-                          />
+                  <div className="space-y-3">
+                    {inputs.skus.map((sku, index) => (
+                      <div key={sku.id} className="bg-muted/30 rounded-lg p-4">
+                        <div className="flex items-center justify-between mb-3">
+                          <h4 className="font-medium">SKU {index + 1}</h4>
+                          {inputs.skus.length > 1 && (
+                            <Button
+                              type="button"
+                              onClick={() => removeSKU(sku.id)}
+                              variant="outline"
+                              size="sm"
+                              className="text-red-500 hover:text-red-700"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          )}
                         </div>
-
-                        <div>
-                          <label className="block text-xs font-medium mb-1">Time per Unit (min)</label>
-                          <input
-                            type="number"
-                            value={sku.timePerUnit}
-                            onChange={(e) => handleSKUChange(sku.id, "timePerUnit", e.target.value)}
-                            placeholder="Time"
-                            step="0.01"
-                            min="0"
-                            className={inputClasses}
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-xs font-medium mb-1">Sale Price ($)</label>
-                          <input
-                            type="number"
-                            value={sku.salePrice}
-                            onChange={(e) => handleSKUChange(sku.id, "salePrice", e.target.value)}
-                            placeholder="Price"
-                            step="0.01"
-                            min="0"
-                            className={inputClasses}
-                          />
-                        </div>
-
-                        {inputs.allocationMethod === "manual" && (
+                        
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
                           <div>
-                            <label className="block text-xs font-medium mb-1">Manual %</label>
+                            <label className="block text-xs font-medium mb-1">Product Name</label>
                             <input
-                              type="number"
-                              value={sku.manualPercent}
-                              onChange={(e) => handleSKUChange(sku.id, "manualPercent", e.target.value)}
-                              placeholder="Percent"
-                              step="0.1"
-                              min="0"
-                              max="100"
+                              type="text"
+                              value={sku.productName}
+                              onChange={(e) => handleSKUChange(sku.id, "productName", e.target.value)}
+                              placeholder="Product name"
                               className={inputClasses}
                             />
                           </div>
-                        )}
+
+                          <div>
+                            <label className="block text-xs font-medium mb-1">Weight (g)</label>
+                            <input
+                              type="number"
+                              value={sku.weight}
+                              onChange={(e) => handleSKUChange(sku.id, "weight", e.target.value)}
+                              placeholder="Weight"
+                              step="0.01"
+                              min="0"
+                              className={inputClasses}
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-xs font-medium mb-1">Time per Unit (min)</label>
+                            <input
+                              type="number"
+                              value={sku.timePerUnit}
+                              onChange={(e) => handleSKUChange(sku.id, "timePerUnit", e.target.value)}
+                              placeholder="Time"
+                              step="0.01"
+                              min="0"
+                              className={inputClasses}
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-xs font-medium mb-1">Sale Price ($)</label>
+                            <input
+                              type="number"
+                              value={sku.salePrice}
+                              onChange={(e) => handleSKUChange(sku.id, "salePrice", e.target.value)}
+                              placeholder="Price"
+                              step="0.01"
+                              min="0"
+                              className={inputClasses}
+                            />
+                          </div>
+
+                          {inputs.allocationMethod === "manual" && (
+                            <div>
+                              <label className="block text-xs font-medium mb-1">Manual %</label>
+                              <input
+                                type="number"
+                                value={sku.manualPercent}
+                                onChange={(e) => handleSKUChange(sku.id, "manualPercent", e.target.value)}
+                                placeholder="Percent"
+                                step="0.1"
+                                min="0"
+                                max="100"
+                                className={inputClasses}
+                              />
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <Button 
-                type="submit" 
-                className="w-full sm:w-auto"
-                disabled={!isFormValid()}
-              >
-                Calculate Allocation
-              </Button>
-
-              {results && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="space-y-6"
+                <Button 
+                  type="submit" 
+                  className="w-full sm:w-auto"
+                  disabled={!isFormValid()}
                 >
-                  {results.map((result) => (
-                    <Card key={result.id} className="border border-border bg-muted/50">
+                  Calculate Allocation
+                </Button>
+
+                {results && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-6"
+                  >
+                    {results.map((result) => (
+                      <Card key={result.id} className="border border-border bg-muted/50">
+                        <CardContent className="p-6">
+                          <h3 className="text-xl font-bold mb-4 text-primary">{result.productName}</h3>
+                          
+                          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div className="bg-background rounded-lg p-3">
+                              <p className="text-xs text-muted-foreground mb-1">% Share</p>
+                              <p className="text-lg font-bold text-primary">
+                                {result.percentShare.toFixed(2)}%
+                              </p>
+                            </div>
+
+                            <div className="bg-background rounded-lg p-3">
+                              <p className="text-xs text-muted-foreground mb-1">Allocated Cost</p>
+                              <p className="text-lg font-bold text-primary">
+                                ${result.allocatedCost.toFixed(2)}
+                              </p>
+                            </div>
+
+                            <div className="bg-background rounded-lg p-3">
+                              <p className="text-xs text-muted-foreground mb-1">Units Produced</p>
+                              <p className="text-lg font-bold text-primary">
+                                {result.unitsProduced.toFixed(0)}
+                              </p>
+                            </div>
+
+                            <div className="bg-background rounded-lg p-3">
+                              <p className="text-xs text-muted-foreground mb-1">Cost per Unit</p>
+                              <p className="text-lg font-bold text-primary">
+                                ${result.costPerUnit.toFixed(2)}
+                              </p>
+                            </div>
+
+                            <div className="bg-background rounded-lg p-3">
+                              <p className="text-xs text-muted-foreground mb-1">Margin per Unit</p>
+                              <p className={`text-lg font-bold ${
+                                result.marginPerUnit >= 0 ? 'text-green-500' : 'text-red-500'
+                              }`}>
+                                ${result.marginPerUnit.toFixed(2)}
+                              </p>
+                            </div>
+
+                            <div className="bg-background rounded-lg p-3">
+                              <p className="text-xs text-muted-foreground mb-1">Total Revenue</p>
+                              <p className="text-lg font-bold text-primary">
+                                ${result.totalRevenue.toFixed(2)}
+                              </p>
+                            </div>
+
+                            <div className="bg-background rounded-lg p-3">
+                              <p className="text-xs text-muted-foreground mb-1">Total Time</p>
+                              <p className="text-lg font-bold text-primary">
+                                {result.totalTime.toFixed(1)} min
+                              </p>
+                            </div>
+
+                            <div className="bg-background rounded-lg p-3">
+                              <p className="text-xs text-muted-foreground mb-1">Cost per Hour</p>
+                              <p className="text-lg font-bold text-primary">
+                                ${result.costPerHour.toFixed(2)}
+                              </p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+
+                    <Card className="border border-primary bg-primary/5">
                       <CardContent className="p-6">
-                        <h3 className="text-xl font-bold mb-4 text-primary">{result.productName}</h3>
-                        
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                          <div className="bg-background rounded-lg p-3">
-                            <p className="text-xs text-muted-foreground mb-1">% Share</p>
-                            <p className="text-lg font-bold text-primary">
-                              {result.percentShare.toFixed(2)}%
+                        <h3 className="text-lg font-semibold mb-4">Summary</h3>
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground">Total Allocated</p>
+                            <p className="text-xl font-bold text-primary">
+                              ${results.reduce((sum, r) => sum + r.allocatedCost, 0).toFixed(2)}
                             </p>
                           </div>
-
-                          <div className="bg-background rounded-lg p-3">
-                            <p className="text-xs text-muted-foreground mb-1">Allocated Cost</p>
-                            <p className="text-lg font-bold text-primary">
-                              ${result.allocatedCost.toFixed(2)}
+                          <div>
+                            <p className="text-sm text-muted-foreground">Total Revenue</p>
+                            <p className="text-xl font-bold text-primary">
+                              ${results.reduce((sum, r) => sum + r.totalRevenue, 0).toFixed(2)}
                             </p>
                           </div>
-
-                          <div className="bg-background rounded-lg p-3">
-                            <p className="text-xs text-muted-foreground mb-1">Units Produced</p>
-                            <p className="text-lg font-bold text-primary">
-                              {result.unitsProduced.toFixed(0)}
-                            </p>
-                          </div>
-
-                          <div className="bg-background rounded-lg p-3">
-                            <p className="text-xs text-muted-foreground mb-1">Cost per Unit</p>
-                            <p className="text-lg font-bold text-primary">
-                              ${result.costPerUnit.toFixed(2)}
-                            </p>
-                          </div>
-
-                          <div className="bg-background rounded-lg p-3">
-                            <p className="text-xs text-muted-foreground mb-1">Margin per Unit</p>
-                            <p className={`text-lg font-bold ${
-                              result.marginPerUnit >= 0 ? 'text-green-500' : 'text-red-500'
+                          <div>
+                            <p className="text-sm text-muted-foreground">Total Profit</p>
+                            <p className={`text-xl font-bold ${
+                              results.reduce((sum, r) => sum + (r.totalRevenue - r.allocatedCost), 0) >= 0 
+                                ? 'text-green-500' : 'text-red-500'
                             }`}>
-                              ${result.marginPerUnit.toFixed(2)}
+                              ${results.reduce((sum, r) => sum + (r.totalRevenue - r.allocatedCost), 0).toFixed(2)}
                             </p>
                           </div>
-
-                          <div className="bg-background rounded-lg p-3">
-                            <p className="text-xs text-muted-foreground mb-1">Total Revenue</p>
-                            <p className="text-lg font-bold text-primary">
-                              ${result.totalRevenue.toFixed(2)}
-                            </p>
-                          </div>
-
-                          <div className="bg-background rounded-lg p-3">
-                            <p className="text-xs text-muted-foreground mb-1">Total Time</p>
-                            <p className="text-lg font-bold text-primary">
-                              {result.totalTime.toFixed(1)} min
-                            </p>
-                          </div>
-
-                          <div className="bg-background rounded-lg p-3">
-                            <p className="text-xs text-muted-foreground mb-1">Cost per Hour</p>
-                            <p className="text-lg font-bold text-primary">
-                              ${result.costPerHour.toFixed(2)}
+                          <div>
+                            <p className="text-sm text-muted-foreground">SKUs Analyzed</p>
+                            <p className="text-xl font-bold text-primary">
+                              {results.length}
                             </p>
                           </div>
                         </div>
                       </CardContent>
                     </Card>
-                  ))}
+                  </motion.div>
+                )}
+              </form>
 
-                  <Card className="border border-primary bg-primary/5">
-                    <CardContent className="p-6">
-                      <h3 className="text-lg font-semibold mb-4">Summary</h3>
-                      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div>
-                          <p className="text-sm text-muted-foreground">Total Allocated</p>
-                          <p className="text-xl font-bold text-primary">
-                            ${results.reduce((sum, r) => sum + r.allocatedCost, 0).toFixed(2)}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground">Total Revenue</p>
-                          <p className="text-xl font-bold text-primary">
-                            ${results.reduce((sum, r) => sum + r.totalRevenue, 0).toFixed(2)}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground">Total Profit</p>
-                          <p className={`text-xl font-bold ${
-                            results.reduce((sum, r) => sum + (r.totalRevenue - r.allocatedCost), 0) >= 0 
-                              ? 'text-green-500' : 'text-red-500'
-                          }`}>
-                            ${results.reduce((sum, r) => sum + (r.totalRevenue - r.allocatedCost), 0).toFixed(2)}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground">SKUs Analyzed</p>
-                          <p className="text-xl font-bold text-primary">
-                            {results.length}
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              )}
-            </form>
-
-            <div className="mt-8">
-              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
-              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>Use actual yield data by type — don't rely on estimated ratios</li>
-                <li>Choose weight-based or market-based allocation based on your tracking method</li>
-                <li>Avoid applying discounts to cost — allocate before discounting revenue</li>
-                <li>Ensure your "total cost of operation" includes overhead, not just variable costs</li>
-                <li>Run this regularly to monitor margin changes between SKUs</li>
-              </ul>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </Layout>
+              <div className="mt-8">
+                <h2 className="text-xl font-semibold mb-4">Tips for Accurate Calculations</h2>
+                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                  <li>Use actual yield data by type — don't rely on estimated ratios</li>
+                  <li>Choose weight-based or market-based allocation based on your tracking method</li>
+                  <li>Avoid applying discounts to cost — allocate before discounting revenue</li>
+                  <li>Ensure your "total cost of operation" includes overhead, not just variable costs</li>
+                  <li>Run this regularly to monitor margin changes between SKUs</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </Layout>
+    </>
   );
 }

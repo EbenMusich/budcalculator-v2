@@ -3,7 +3,6 @@ import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
   const userAgent = request.headers.get('user-agent') || ''
-  const ageVerified = request.cookies.get('ageVerified')?.value === 'true'
 
   // ✅ Allow known crawlers to skip age gate
   const isBot = /googlebot|bingbot|slurp|duckduckbot|yahoo|facebookexternalhit/i.test(userAgent)
@@ -53,24 +52,12 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // ✅ Allow if cookie shows age verified
-  if (ageVerified) {
-    return NextResponse.next()
-  }
-
-  // ✅ Don't redirect if already on age gate
-  if (request.nextUrl.pathname === '/age-gate') {
-    return NextResponse.next()
-  }
-
-  // 🔁 Otherwise, redirect to age gate
-  const url = request.nextUrl.clone()
-  url.pathname = '/age-gate'
-  return NextResponse.redirect(url)
+  // Age verification is now handled client-side with localStorage
+  return NextResponse.next()
 }
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|age-gate).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
   ],
 }

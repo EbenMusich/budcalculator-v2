@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Head from "next/head";
 import Layout from "@/components/Layout";
 import { Calculator, Lightbulb, Users, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -150,323 +151,348 @@ export default function YieldForecastCalculator() {
   const inputClasses = "w-full rounded-md bg-background text-foreground px-3 py-2 text-sm ring-1 ring-border/30 focus:ring-2 focus:ring-primary placeholder:text-muted-foreground";
 
   return (
-    <Layout>
-      <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="border border-border bg-secondary rounded-2xl shadow p-6 lg:p-8">
-          <div className="flex items-center gap-3 mb-4">
-            <Calculator className="w-6 h-6 text-primary" />
-            <h1 className="text-3xl font-bold">Yield Forecast Calculator</h1>
-          </div>
-          <p className="text-muted-foreground mb-8">
-            Project your harvest yields based on different metrics and calculate potential revenue.
-          </p>
+    <>
+      <Head>
+        <link rel="canonical" href="https://budcalculator.com/calculators/yield-forecasting" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Yield Forecasting Calculator",
+            "url": "https://budcalculator.com/calculators/yield-forecasting",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "description": "Forecast cannabis crop yields by light, plant, or canopy area. Useful for cultivators planning harvest size, revenue, and production strategy.",
+            "creator": {
+              "@type": "Organization",
+              "name": "BUD Calculator"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "0.00",
+              "priceCurrency": "USD"
+            }
+          })
+        }} />
+      </Head>
+      <Layout>
+        <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="border border-border bg-secondary rounded-2xl shadow p-6 lg:p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <Calculator className="w-6 h-6 text-primary" />
+              <h1 className="text-3xl font-bold">Yield Forecast Calculator</h1>
+            </div>
+            <p className="text-muted-foreground mb-8">
+              Project your harvest yields based on different metrics and calculate potential revenue.
+            </p>
 
-          <form onSubmit={calculateResults} className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Mode selector */}
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Select Forecasting Mode
-                </label>
-                <Select
-                  value={inputs.mode}
-                  onValueChange={(value) => handleSelectChange(value, 'mode')}
-                >
-                  <SelectTrigger className="w-full bg-background">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="light">
-                      <div className="flex items-center gap-2">
-                        <Lightbulb className="w-4 h-4" />
-                        Per Light
-                      </div>
-                    </SelectItem>
-                    <SelectItem value="plant">
-                      <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4" />
-                        Per Plant
-                      </div>
-                    </SelectItem>
-                    <SelectItem value="canopy">
-                      <div className="flex items-center gap-2">
-                        <BarChart3 className="w-4 h-4" />
-                        Per Canopy Area
-                      </div>
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+            <form onSubmit={calculateResults} className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Mode selector */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Select Forecasting Mode
+                  </label>
+                  <Select
+                    value={inputs.mode}
+                    onValueChange={(value) => handleSelectChange(value, 'mode')}
+                  >
+                    <SelectTrigger className="w-full bg-background">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="light">
+                        <div className="flex items-center gap-2">
+                          <Lightbulb className="w-4 h-4" />
+                          Per Light
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="plant">
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4" />
+                          Per Plant
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="canopy">
+                        <div className="flex items-center gap-2">
+                          <BarChart3 className="w-4 h-4" />
+                          Per Canopy Area
+                        </div>
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
-              {/* Harvests per year */}
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Number of Harvests per Year
-                </label>
-                <input
-                  type="number"
-                  name="harvestsPerYear"
-                  value={inputs.harvestsPerYear}
-                  onChange={handleInputChange}
-                  placeholder="e.g. 4"
-                  className={inputClasses}
-                />
-              </div>
-
-              {/* Per Light inputs */}
-              {inputs.mode === 'light' && (
-                <>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      <div className="flex items-center gap-2">
-                        <Lightbulb className="w-4 h-4" />
-                        Number of Lights
-                      </div>
-                    </label>
-                    <input
-                      type="number"
-                      name="lights"
-                      value={inputs.lights}
-                      onChange={handleInputChange}
-                      placeholder="e.g. 20"
-                      className={inputClasses}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Yield per Light
-                    </label>
-                    <div className="flex gap-2 items-center">
-                      <input
-                        type="number"
-                        name="yieldPerLight"
-                        value={inputs.yieldPerLight}
-                        onChange={handleInputChange}
-                        placeholder="e.g. 1.5"
-                        step="0.01"
-                        className={`flex-1 ${inputClasses}`}
-                      />
-                      <Select
-                        value={inputs.unitLight}
-                        onValueChange={(value) => handleSelectChange(value, 'unitLight')}
-                      >
-                        <SelectTrigger className="w-20 bg-background">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="g">g</SelectItem>
-                          <SelectItem value="lb">lb</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {/* Per Plant inputs */}
-              {inputs.mode === 'plant' && (
-                <>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4" />
-                        Number of Plants
-                      </div>
-                    </label>
-                    <input
-                      type="number"
-                      name="plants"
-                      value={inputs.plants}
-                      onChange={handleInputChange}
-                      placeholder="e.g. 100"
-                      className={inputClasses}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Yield per Plant
-                    </label>
-                    <div className="flex gap-2 items-center">
-                      <input
-                        type="number"
-                        name="yieldPerPlant"
-                        value={inputs.yieldPerPlant}
-                        onChange={handleInputChange}
-                        placeholder="e.g. 0.5"
-                        step="0.01"
-                        className={`flex-1 ${inputClasses}`}
-                      />
-                      <Select
-                        value={inputs.unitPlant}
-                        onValueChange={(value) => handleSelectChange(value, 'unitPlant')}
-                      >
-                        <SelectTrigger className="w-20 bg-background">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="g">g</SelectItem>
-                          <SelectItem value="lb">lb</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {/* Per Canopy inputs */}
-              {inputs.mode === 'canopy' && (
-                <>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      <div className="flex items-center gap-2">
-                        <BarChart3 className="w-4 h-4" />
-                        Canopy Area (sq ft)
-                      </div>
-                    </label>
-                    <input
-                      type="number"
-                      name="canopyArea"
-                      value={inputs.canopyArea}
-                      onChange={handleInputChange}
-                      placeholder="e.g. 1000"
-                      className={inputClasses}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Yield per Sq Ft
-                    </label>
-                    <div className="flex gap-2 items-center">
-                      <input
-                        type="number"
-                        name="yieldPerArea"
-                        value={inputs.yieldPerArea}
-                        onChange={handleInputChange}
-                        placeholder="e.g. 1.2"
-                        step="0.01"
-                        className={`flex-1 ${inputClasses}`}
-                      />
-                      <Select
-                        value={inputs.unitArea}
-                        onValueChange={(value) => handleSelectChange(value, 'unitArea')}
-                      >
-                        <SelectTrigger className="w-20 bg-background">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="g">g</SelectItem>
-                          <SelectItem value="lb">lb</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {/* Trim ratio */}
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Trim Ratio (%) (optional)
-                </label>
-                <input
-                  type="number"
-                  name="trimRatio"
-                  value={inputs.trimRatio}
-                  onChange={handleInputChange}
-                  placeholder="e.g. 15"
-                  min="0"
-                  max="100"
-                  className={inputClasses}
-                />
-              </div>
-
-              {/* Sale price */}
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Estimated Sale Price per Pound (optional)
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                {/* Harvests per year */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Number of Harvests per Year
+                  </label>
                   <input
                     type="number"
-                    name="salePrice"
-                    value={inputs.salePrice}
+                    name="harvestsPerYear"
+                    value={inputs.harvestsPerYear}
                     onChange={handleInputChange}
-                    placeholder="e.g. 1500"
-                    step="0.01"
-                    className={`pl-8 ${inputClasses}`}
+                    placeholder="e.g. 4"
+                    className={inputClasses}
                   />
                 </div>
-              </div>
-            </div>
 
-            <Button type="submit" className="w-full sm:w-auto">
-              Calculate
-            </Button>
-
-            {results && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="space-y-6"
-              >
-                <div className="bg-muted/50 rounded-lg p-6">
-                  <h3 className="text-xl font-bold mb-4 text-primary">Yield Forecast Results</h3>
-                  
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div className="bg-background rounded-lg p-3">
-                      <p className="text-xs text-muted-foreground mb-1">Total Yield (per harvest)</p>
-                      <p className="text-lg font-bold text-primary">
-                        {results.totalYield.toFixed(2)} lbs
-                      </p>
+                {/* Per Light inputs */}
+                {inputs.mode === 'light' && (
+                  <>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        <div className="flex items-center gap-2">
+                          <Lightbulb className="w-4 h-4" />
+                          Number of Lights
+                        </div>
+                      </label>
+                      <input
+                        type="number"
+                        name="lights"
+                        value={inputs.lights}
+                        onChange={handleInputChange}
+                        placeholder="e.g. 20"
+                        className={inputClasses}
+                      />
                     </div>
-
-                    <div className="bg-background rounded-lg p-3">
-                      <p className="text-xs text-muted-foreground mb-1">Usable Flower</p>
-                      <p className="text-lg font-bold text-primary">
-                        {results.usableFlower.toFixed(2)} lbs
-                      </p>
-                    </div>
-
-                    <div className="bg-background rounded-lg p-3">
-                      <p className="text-xs text-muted-foreground mb-1">Trim</p>
-                      <p className="text-lg font-bold text-primary">
-                        {results.trim.toFixed(2)} lbs
-                      </p>
-                    </div>
-
-                    <div className="bg-background rounded-lg p-3">
-                      <p className="text-xs text-muted-foreground mb-1">Annual Yield</p>
-                      <p className="text-lg font-bold text-primary">
-                        {results.annualYield.toFixed(2)} lbs
-                      </p>
-                    </div>
-
-                    {results.annualRevenue !== null ? (
-                      <div className="bg-background rounded-lg p-3 sm:col-span-2">
-                        <p className="text-xs text-muted-foreground mb-1">Potential Annual Revenue</p>
-                        <p className="text-xl font-bold text-primary">
-                          ${results.annualRevenue.toFixed(2)}
-                        </p>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        Yield per Light
+                      </label>
+                      <div className="flex gap-2 items-center">
+                        <input
+                          type="number"
+                          name="yieldPerLight"
+                          value={inputs.yieldPerLight}
+                          onChange={handleInputChange}
+                          placeholder="e.g. 1.5"
+                          step="0.01"
+                          className={`flex-1 ${inputClasses}`}
+                        />
+                        <Select
+                          value={inputs.unitLight}
+                          onValueChange={(value) => handleSelectChange(value, 'unitLight')}
+                        >
+                          <SelectTrigger className="w-20 bg-background">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="g">g</SelectItem>
+                            <SelectItem value="lb">lb</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
-                    ) : null}
+                    </div>
+                  </>
+                )}
+
+                {/* Per Plant inputs */}
+                {inputs.mode === 'plant' && (
+                  <>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4" />
+                          Number of Plants
+                        </div>
+                      </label>
+                      <input
+                        type="number"
+                        name="plants"
+                        value={inputs.plants}
+                        onChange={handleInputChange}
+                        placeholder="e.g. 100"
+                        className={inputClasses}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        Yield per Plant
+                      </label>
+                      <div className="flex gap-2 items-center">
+                        <input
+                          type="number"
+                          name="yieldPerPlant"
+                          value={inputs.yieldPerPlant}
+                          onChange={handleInputChange}
+                          placeholder="e.g. 0.5"
+                          step="0.01"
+                          className={`flex-1 ${inputClasses}`}
+                        />
+                        <Select
+                          value={inputs.unitPlant}
+                          onValueChange={(value) => handleSelectChange(value, 'unitPlant')}
+                        >
+                          <SelectTrigger className="w-20 bg-background">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="g">g</SelectItem>
+                            <SelectItem value="lb">lb</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {/* Per Canopy inputs */}
+                {inputs.mode === 'canopy' && (
+                  <>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        <div className="flex items-center gap-2">
+                          <BarChart3 className="w-4 h-4" />
+                          Canopy Area (sq ft)
+                        </div>
+                      </label>
+                      <input
+                        type="number"
+                        name="canopyArea"
+                        value={inputs.canopyArea}
+                        onChange={handleInputChange}
+                        placeholder="e.g. 1000"
+                        className={inputClasses}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        Yield per Sq Ft
+                      </label>
+                      <div className="flex gap-2 items-center">
+                        <input
+                          type="number"
+                          name="yieldPerArea"
+                          value={inputs.yieldPerArea}
+                          onChange={handleInputChange}
+                          placeholder="e.g. 1.2"
+                          step="0.01"
+                          className={`flex-1 ${inputClasses}`}
+                        />
+                        <Select
+                          value={inputs.unitArea}
+                          onValueChange={(value) => handleSelectChange(value, 'unitArea')}
+                        >
+                          <SelectTrigger className="w-20 bg-background">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="g">g</SelectItem>
+                            <SelectItem value="lb">lb</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {/* Trim ratio */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Trim Ratio (%) (optional)
+                  </label>
+                  <input
+                    type="number"
+                    name="trimRatio"
+                    value={inputs.trimRatio}
+                    onChange={handleInputChange}
+                    placeholder="e.g. 15"
+                    min="0"
+                    max="100"
+                    className={inputClasses}
+                  />
+                </div>
+
+                {/* Sale price */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Estimated Sale Price per Pound (optional)
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                    <input
+                      type="number"
+                      name="salePrice"
+                      value={inputs.salePrice}
+                      onChange={handleInputChange}
+                      placeholder="e.g. 1500"
+                      step="0.01"
+                      className={`pl-8 ${inputClasses}`}
+                    />
                   </div>
                 </div>
-              </motion.div>
-            )}
-          </form>
+              </div>
 
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">Tips for Accurate Forecasting</h2>
-            <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-              <li>Use conservative estimates based on your actual historical yields</li>
-              <li>Account for seasonal variations and environmental factors</li>
-              <li>Factor in potential crop losses due to pests, disease, or quality issues</li>
-              <li>Consider market price fluctuations when planning revenue projections</li>
-            </ul>
+              <Button type="submit" className="w-full sm:w-auto">
+                Calculate
+              </Button>
+
+              {results && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="space-y-6"
+                >
+                  <div className="bg-muted/50 rounded-lg p-6">
+                    <h3 className="text-xl font-bold mb-4 text-primary">Yield Forecast Results</h3>
+                    
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      <div className="bg-background rounded-lg p-3">
+                        <p className="text-xs text-muted-foreground mb-1">Total Yield (per harvest)</p>
+                        <p className="text-lg font-bold text-primary">
+                          {results.totalYield.toFixed(2)} lbs
+                        </p>
+                      </div>
+
+                      <div className="bg-background rounded-lg p-3">
+                        <p className="text-xs text-muted-foreground mb-1">Usable Flower</p>
+                        <p className="text-lg font-bold text-primary">
+                          {results.usableFlower.toFixed(2)} lbs
+                        </p>
+                      </div>
+
+                      <div className="bg-background rounded-lg p-3">
+                        <p className="text-xs text-muted-foreground mb-1">Trim</p>
+                        <p className="text-lg font-bold text-primary">
+                          {results.trim.toFixed(2)} lbs
+                        </p>
+                      </div>
+
+                      <div className="bg-background rounded-lg p-3">
+                        <p className="text-xs text-muted-foreground mb-1">Annual Yield</p>
+                        <p className="text-lg font-bold text-primary">
+                          {results.annualYield.toFixed(2)} lbs
+                        </p>
+                      </div>
+
+                      {results.annualRevenue !== null ? (
+                        <div className="bg-background rounded-lg p-3 sm:col-span-2">
+                          <p className="text-xs text-muted-foreground mb-1">Potential Annual Revenue</p>
+                          <p className="text-xl font-bold text-primary">
+                            ${results.annualRevenue.toFixed(2)}
+                          </p>
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </form>
+
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Tips for Accurate Forecasting</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Use conservative estimates based on your actual historical yields</li>
+                <li>Account for seasonal variations and environmental factors</li>
+                <li>Factor in potential crop losses due to pests, disease, or quality issues</li>
+                <li>Consider market price fluctuations when planning revenue projections</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 }

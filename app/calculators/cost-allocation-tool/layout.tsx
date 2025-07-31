@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     images: ["/assets/preview.png"],
   },
   alternates: {
-    canonical: "https://budcalculator.com/pages/cost-allocation-tool",
+    canonical: "https://budcalculator.com/calculators/cost-allocation-tool",
   },
 };
 

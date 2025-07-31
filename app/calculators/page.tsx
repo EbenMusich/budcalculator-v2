@@ -1,18 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 import Link from "next/link";
 import Layout from "@/components/Layout";
-import { Calculator, Leaf, FlaskConical, PieChart } from "lucide-react";
 import { calculators } from "@/data/calculatorData";
 
 type Category = "All" | "Cultivation" | "Extraction" | "Edibles" | "Business" | "Retail";
 
 export default function CalculatorsPage() {
-  const searchParams = useSearchParams();
-  const initialCategory = (searchParams.get("category") as Category) || "All";
-  const [category, setCategory] = useState<Category>(initialCategory);
+  const [category, setCategory] = useState<Category>("All");
 
   const filteredCalculators = calculators.filter(calc => 
     category === "All" || calc.category === category
