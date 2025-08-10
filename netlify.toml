@@ -144,3 +144,41 @@
   from = "/privacy.html"
   to = "/privacy"
   status = 301
+
+# New redirect rules for old .html URLs
+[[redirects]]
+  from = "/calculators/:slug.html"
+  to = "/calculators/:slug"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pages/:calc.html"
+  to = "/calculators/:calc"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pages/:slug.html"
+  to = "/:slug"
+  status = 301
+  force = true
+
+# Explicit rules for specific calculators (even though some may already exist)
+[[redirects]]
+  from = "/calculators/profit-margin.html"
+  to = "/calculators/profit-margin"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/calculators/cost-per-unit.html"
+  to = "/calculators/cost-per-unit"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/calculators/extraction-cost.html"
+  to = "/calculators/extraction-cost"
+  status = 301
+  force = true
